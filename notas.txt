@@ -1,0 +1,1 @@
+LOAD DATA LOCAL INFILE '/home/giovanni/Work/WebBiblioteca/fichas.csv' INTO TABLE fichas FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' (id, assunto, periodico, data, duracao, pagina, resumo, comentarios, edicao);
