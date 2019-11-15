@@ -3,6 +3,9 @@
 namespace App\Http\Executar;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use App\Http\Componentes\BarraBusca;
+use App\Http\Componentes\GridResultados;
 
 class PesquisaFicha
 {
@@ -47,8 +50,14 @@ class PesquisaFicha
 
 	public function view(): \Illuminate\View\View
 	{
-		return $view = view('home')
-		->with('resultadosBusca', $this->resultadosBusca)
-		->with('wordCount', $this->resultadosBusca->count());
+		$barraBusca = new BarraBusca($this->termoBusca);
+		$gridResultados = new GridResultados($this->resultadosBusca);
+
+		return view('home')
+			->with('barraBusca', $barraBusca->view())
+			->with('gridResultados', $gridResultados->view())
+			->with('termoBusca', $this->termoBusca)
+			->with('resultadosBusca', $this->resultadosBusca)
+			->with('wordCount', $this->resultadosBusca->count());
 	}
 }

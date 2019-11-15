@@ -1,22 +1,26 @@
 <?php
 
-namespace Http\Componentes;
+namespace App\Http\Componentes;
 
-class BarraBusca
+use App\Http\Componentes\Componentes;
+
+class BarraBusca extends Componentes
 {
 
-	public $bladeView = 'componentes.barraBusca';
 	public $termoBusca;
 
-	public function __construct(string $termoBusca)
+	public function __construct(?string $termoBusca = null)
 	{
+		$this->bladeView = 'componentes.barraBusca';
+		parent::__construct();
 		$this->termoBusca = $termoBusca;
-		$this->view();
 	}
 
-	public function view()
+	public function view(): \Illuminate\View\View
 	{
-		return view($bladeView);
-	}
+		$view = parent::view();
+		$barraBusca = view($this->bladeView);
 
+		return $view->with('barraBusca', $barraBusca);
+	}
 }
