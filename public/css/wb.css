@@ -1,0 +1,41 @@
+body{
+	background-image: url("/public/img/biblioteca-municipal-murilo-mendes-em-juiz-de-fora.jpg");
+	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	background-color:#003300;
+	color: #ffffff;
+}
+
+input.form-check {
+	margin-top: 10px;
+
+}
+
+h1 {
+	font-family: 'EB Garamond', serif;
+	color:bisque
+}
+h1.sub-header {
+	font-family: 'EB Garamond', serif;
+	color:bisque;
+	font-size:30px;
+}
+
+a {
+	font-family: 'EB Garamond', serif;
+	font-size: 20px;
+	color:bisque
+}
+
+a.navbar-brand {
+		font-family: 'EB Garamond', serif;
+		font-size: 20px;
+		color:bisque
+	}
+
+div.index {
+	margin-top: 80px;
+	}
+div.form-busca {
+	margin-top: 40px;
+	}

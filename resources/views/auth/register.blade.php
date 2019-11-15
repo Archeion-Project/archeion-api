@@ -12,28 +12,12 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="nome" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nome" type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome') }}" required autocomplete="nome" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                @error('nome')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">{{ __('Função') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="tipo_usuario" type="text" class="form-control @error('tipo_usuario') is-invalid @enderror" name="tipo_usuario" required autocomplete="tipo_usuario">
-                                    <option value="admin">Administrador</option> 
-                                    <option value="editor" selected>Editor</option>
-                                </select>
-                                @error('tipo_usuario')
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

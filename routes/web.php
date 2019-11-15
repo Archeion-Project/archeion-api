@@ -11,18 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'ExecutaBuscaController@index');
+
+Route::get('/executaBusca',  'ExecutaBuscaController@buscar');
+
+Route::get('resultadosBusca', function () {
+    $users = App\User::paginate(15);
+
+    $users->withPath('custom/url');
+
+    //
 });
-
-// Route::put('/foo/bar', function () {
-//     return 'uau';
-// });
-
-Route::put('/foo/bar',  'HomeController@buscar');
-
-
-Route::get('/{termo}', 'SystemController@index');
 
 Route::get('/client_organizations/index/{componentPath?}', 'ClientOrganizationController@index')
 ->name('client_organization.index');
