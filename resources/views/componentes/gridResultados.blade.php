@@ -1,11 +1,11 @@
-<table class="table">
-	<thead>
+<table class="table table-sm table-hover">
+	<thead class="stick-head">
 		<tr>
-			<th scope="col">Assunto</th>
-			<th scope="col">Periódico</th>
-			<th scope="col">Data</th>
-			<th scope="col">Resumo</th>
-			<th scope="col">Comentários</th>
+			<th scope="col-2">Assunto</th>
+			<th scope="col-2">Periódico</th>
+			<th scope="col-2">Data</th>
+			<th scope="col-4">Resumo</th>
+			<th scope="col-2">Comentários</th>
 		</tr>
 	</thead>
 	<tbody>
