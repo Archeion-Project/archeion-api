@@ -50,10 +50,12 @@ class PesquisaFicha
 
 	public function view(): \Illuminate\View\View
 	{
+		$navbar = view('blocos.navbar');
 		$barraBusca = new BarraBusca($this->termoBusca);
 		$gridResultados = new GridResultados($this->resultadosBusca);
 
 		return view('home')
+			->with('navbar', $navbar)
 			->with('barraBusca', $barraBusca->view())
 			->with('gridResultados', $gridResultados->view())
 			->with('termoBusca', $this->termoBusca)

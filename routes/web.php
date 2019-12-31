@@ -11,23 +11,26 @@
 |
 */
 
-Route::get('/', 'ExecutaBuscaController@index');
+Route::get('/', 'InicialController@index');
 
-Route::get('/executaBusca',  'ExecutaBuscaController@buscar');
+Route::get('/acervo','InicialController@acervo');
+
+Route::get('/localizacao','InicialController@localização');
+
+Route::get('/sobre', 'InicialController@sobre');
+
+Route::get('/executaBusca',  'InicialController@buscar');
 
 Route::get('resultadosBusca', function () {
-    $users = App\User::paginate(15);
-
-    $users->withPath('custom/url');
-
-    //
+	$users = App\User::paginate(15);
+	$users->withPath('custom/url');
 });
 
-Route::get('/client_organizations/index/{componentPath?}', 'ClientOrganizationController@index')
-->name('client_organization.index');
+// Route::get('/client_organizations/index/{componentPath?}', 'ClientOrganizationController@index')
+// ->name('client_organization.index');
 
 Auth::routes();
 
-Route::get('/buscar', 'pesquisaAcervo@buscar');
+// Route::get('/buscar', 'pesquisaAcervo@buscar');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'InicialController@index')->name('home');

@@ -11,21 +11,20 @@
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav mr-auto">
 				@can('isAdmin')
-					<li class="nav-link"><a href="#dashboard"></a>dashboard</li>
-					<li class="nav-link"><a href="#new-post"></a>new post</li>
-					<li class="nav-link"><a href="#edit"></a>edit</li>
-					<li class="nav-link"><a href="#delete"></a>delete</li>
+					<li class="nav-link"><a href="#dashboard"></a>Dashboard</li>
+					<li class="nav-link"><a href="#noticias"></a>Notícias</li>
+					<li class="nav-link"><a href="#periodicos"></a>Periódicos</li>
+					<li>
+						@can('isAdmin')
+							<a class="nav-link registrar" href="{{ route('register') }}">{{ __('Usuários') }}</a>
+						@endcan
+					</li>
+
 				@endcan
 					
 				@can('isEditor')
-					<li class="nav-link"><a href="#dashboard"></a>dashboard</li>
-					<li class="nav-link"><a href="#new-post"></a>new post</li>
-					<li class="nav-link"><a href="#edit"></a>edit</li>
+					<li class="nav-link"><a href="#periodicos"></a>Periódicos</li>
 				@endcan
-					<!-- Visitante -->
-					<li class="nav-link"><a href="{{  url('/acervo')  }}">Acervo</a></li>
-					<li class="nav-link"><a href="{{  url('/localizacao')  }}">Localização</a></li>
-					<li class="nav-link"><a href="{{  url('/sobre')  }}">Sobre o projeto</a></li>
 
 			</ul>
 			<!-- End of Left Side Of Navbar -->
@@ -42,24 +41,24 @@
 							<a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
 						</li>
 					@endif
-					@else
-						<li class="nav-item dropdown">
-							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-								{{ Auth::user()->name }} <span class="caret"></span>
+				@else
+					<li class="nav-item dropdown">
+						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+							{{ Auth::user()->nome }} <span class="caret"></span>
+						</a>
+
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="{{ route('logout') }}"
+							onclick="event.preventDefault();
+											document.getElementById('logout-form').submit();">
+								{{ __('Sair') }}
 							</a>
 
-							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="{{ route('logout') }}"
-								onclick="event.preventDefault();
-												document.getElementById('logout-form').submit();">
-									{{ __('Sair') }}
-								</a>
-
-								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-										@csrf
-								</form>
-							</div>
-						</li>
+							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									@csrf
+							</form>
+						</div>
+					</li>
 				@endguest
 			</ul>
 		</div>

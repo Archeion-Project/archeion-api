@@ -3,7 +3,8 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class FichasTableSeeder extends Seeder {
+class FichasTableSeeder extends Seeder
+{
 
 	public function __construct()
 	{
