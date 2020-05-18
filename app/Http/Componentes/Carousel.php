@@ -3,28 +3,32 @@
 namespace App\Http\Componentes;
 
 use App\Http\Componentes\Componentes;
+use App\Noticia;
 use Illuminate\Support\Facades\DB;
 
 class Carousel extends Componentes
 {
 	public $slidesCarousel;
+	public $itemsCarousel;
 	
-	public function __construct()
+	public function __construct(int $num_items)
 	{
 		$this->bladeView = 'componentes.carousel';
 		$this->slidesCarousel = [];
-		$this->itemsCarousel();
+		$this->obterNoticiasCarousel($num_items);
 		parent::__construct();
 	}
 
-	public function obterItemsCarousel()
+	public function obterNoticiasCarousel(int $num_itens)
 	{
-		return DB::select('select * from noticias limit 3');
+		$noticia = new Noticia;
+		$this->itemsCarousel = $noticia->obterItems($num_itens);
+		return $this->arrayItemsCarousel($this->itemsCarousel);
 	}
 
-	public function itemsCarousel()
+	public function arrayItemsCarousel($items)
 	{
-		foreach($this->obterItemsCarousel() as $item)
+		foreach($items as $item)
 		{
 			$slideCarousel = array($item->id, $item->titulo, $item->subtitulo, $item->imagem);
 			array_push($this->slidesCarousel, $slideCarousel);
