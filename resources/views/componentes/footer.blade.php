@@ -14,7 +14,7 @@
 		<a class="footer-brand" href="{{ url('/') }}">
 			{{ config('app.name', 'BiblioWeb') }}
 		</a>
-		<p>Navegue pelo site do Setor de Memória da Biblioteca Municipal Murilo Mendes</p>
+		<p class="footer">Navegue pelo site do Setor de Memória da Biblioteca Municipal Murilo Mendes</p>
 
 	</div>
 	<!-- Grid column -->
@@ -29,13 +29,13 @@
 
 		<ul class="list-unstyled">
 
-			<li><a href="/acervo">Acervo</a></li>
-			<li><a href="#!">Localização</a></li>
-			<li><a href="#!">Sobre o projeto</a></li>
+			<li><a class="footer-link" href="/acervo">Acervo</a></li>
+			<li><a class="footer-link" href="/localizacao">Localização</a></li>
+			<li><a class="footer-link" href="/sobre">Sobre o projeto</a></li>
 			@guest
 
 				<li class="nav-item">
-					<a href="{{ route('login') }}">{{ __('Administração') }}</a>
+					<a class="footer-link" href="{{ route('login') }}">{{ __('Administração') }}</a>
 				</li>
 
 			@endguest
