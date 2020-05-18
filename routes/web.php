@@ -26,11 +26,6 @@ Route::get('resultadosBusca', function () {
 	$users->withPath('custom/url');
 });
 
-// Route::get('/client_organizations/index/{componentPath?}', 'ClientOrganizationController@index')
-// ->name('client_organization.index');
-
 Auth::routes();
-
-// Route::get('/buscar', 'pesquisaAcervo@buscar');
 
 Route::get('/home', 'InicialController@index')->name('home');
