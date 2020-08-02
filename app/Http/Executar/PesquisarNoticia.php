@@ -16,7 +16,7 @@ class PesquisarNoticia
 
 	public function obterUltimasNoticias(int $numero)
 	{
-		return Noticia::latest('noticias')->limit($numero);
+		return $this::orderBy('updated_at')->take($numero)->get();
 	}
 
 	public function view(): \Illuminate\View\View

@@ -12,7 +12,7 @@
 			<ul class="navbar-nav mr-auto">
 				@can('isAdmin')
 					<li class="nav-link"><a href="#dashboard"></a>Dashboard</li>
-					<li class="nav-link"><a href="#noticias"></a>Notícias</li>
+					<li class="nav-link"><a href="/noticia">Notícias</a></li>
 					<li class="nav-link"><a href="#periodicos"></a>Periódicos</li>
 					<li>
 						@can('isAdmin')
