@@ -1,41 +1,134 @@
+html {
+	
+	font-size: 16px;
+	line-height: 23px;
+	
+	@media (max-width: 1200px) {
+		font-size: 15px;
+	}
+	
+	@media (max-width: 800px) {
+		font-size: 14px;
+	}
+	
+}
+
 body{
 	background-image: url("/public/img/biblioteca-municipal-murilo-mendes-em-juiz-de-fora.jpg");
-	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 16px;
-	background-color:#003300;
+	font-family: 'Raleway';
+	background-color:#002200;
 	color: #ffffff;
 }
 
-input.form-check {
-	margin-top: 10px;
-
-}
-
-h1 {
-	font-family: 'EB Garamond', serif;
-	color:bisque
-}
-h1.sub-header {
-	font-family: 'EB Garamond', serif;
-	color:bisque;
-	font-size:30px;
-}
-
 a {
-	font-family: 'EB Garamond', serif;
-	font-size: 20px;
-	color:bisque
+	text-decoration: none;
 }
 
-a.navbar-brand {
-		font-family: 'EB Garamond', serif;
-		font-size: 20px;
-		color:bisque
-	}
+a.header-carousel {
+	color:white;
+	font-size:1.602em;
+}
+
+a.sub-header-carousel {
+	color:white;
+	font-size:1.125em
+}
+
+a.footer-link {
+	font-size: 1em;
+	color:black;
+}
+
+a.footer-brand {
+	font-size: 1.25em;
+	color:red;
+}
+
+a:hover 
+{
+	color: black; 
+	text-decoration:none; 
+	cursor:pointer;  
+}
+
+
+.carousel.slide{
+	max-width: 500px;
+	min-width: 300px;
+	overflow: hidden;
+	margin: auto;
+}
+
+.carousel-inner{
+width: 500px;
+height: 300px;
+left: 0%;
+}
+
+input {
+	font-family: Arial, Helvetica, sans-serif;
+	margin-top: 10px;
+}
+
+div.iframe {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+p {
+	color: white;
+}
+
+p.footer {
+	color: black;
+}
+
+p.header {
+	color:white;
+	font-size:2.887em;
+}
+
+p.sub-header {
+	font-size:1.802em
+}
+
+h5 {
+	color:red;
+}
+
+thead.stick-head {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 1;
+	position: sticky;
+	top: 0px;
+}
+
+div.card {
+	color:black;
+}
 
 div.index {
-	margin-top: 80px;
-	}
+margin-top: 0px;
+}
+					
+table {
+	font-size: 13px;
+	font-family: 'Source Code Pro', monospace;
+}
+
 div.form-busca {
 	margin-top: 40px;
-	}
+}
+
+div.footer {
+	background-color: white;
+	margin-bottom: 0;
+}
+
+#loadOverlay{display: none;}
