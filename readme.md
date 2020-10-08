@@ -53,16 +53,16 @@
 
 
 <p>Adicionar à biblioweb.conf</p>
-	<code><VirtualHost *:80></code>
-	<code>ServerName 3.22.51.93</code>
-	<code>ServerAdmin webmaster@thedomain.com</code>
-	<code>DocumentRoot /var/www/html/biblioweb/public</code>
-	<code><Directory /var/www/html/biblioweb></code>
-	<code>AllowOverride All</code>
-	<code></Directory></code>
-	<code>ErrorLog ${APACHE_LOG_DIR}/error.log</code>
-	<code>CustomLog ${APACHE_LOG_DIR}/access.log combined</code>
-	<code></VirtualHost></code>
+	<code><VirtualHost *:80></code><br>
+	<code>ServerName 3.22.51.93</code><br>
+	<code>ServerAdmin webmaster@thedomain.com</code><br>
+	<code>DocumentRoot /var/www/html/biblioweb/public</code><br>
+	<code><Directory /var/www/html/biblioweb></code><br>
+	<code>AllowOverride All</code><br>
+	<code></Directory></code><br>
+	<code>ErrorLog ${APACHE_LOG_DIR}/error.log</code><br>
+	<code>CustomLog ${APACHE_LOG_DIR}/access.log combined</code><br>
+	<code></VirtualHost></code><br>
 
 <ul>
 	<li>sudo a2dissite 000-default.conf</li>
