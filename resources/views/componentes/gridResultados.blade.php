@@ -13,7 +13,7 @@
 			<tr>
 				<td>{{ $resultadoBusca->assunto }}</td>
 				<td>{{ $resultadoBusca->periodico }}</td>
-				<td>{{ $resultadoBusca->data_edicao }}</td>
+				<td>{{ (new \Carbon\Carbon($resultadoBusca->data_edicao))->format('d/m/Y') }}</td>
 				<td>{{ $resultadoBusca->resumo }}</td>
 				<td>{{ $resultadoBusca->comentarios }}</td>
 			</tr>
