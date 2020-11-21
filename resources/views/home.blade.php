@@ -6,17 +6,17 @@
 	<div class="barraBusca">
 
 		{!! $barraBusca !!}
-
 		<h2>Resultados encontrados para "{!! $termoBusca !!}": {{ $wordCount }}</h2>
 
 	</div>
 
 	<div class="gridResultados">
-
 		{!! $gridResultados !!}
-
 	</div>
 
+	<div class="footer">
+		{!! $footer !!}
+	</div>
 
 	@if(Auth::user())
 		<div class="row justify-content-center">

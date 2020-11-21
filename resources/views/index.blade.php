@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
-@if(Auth::user())
-
 	{!! $navbar !!}
-
-@endif
 
 <div class="container">
 	
