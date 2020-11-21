@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Http\Componentes\BarraBusca;
 use App\Http\Componentes\GridResultados;
+use Illuminate\Support\Collection;
 
 class PesquisaFicha
 {
@@ -14,7 +15,7 @@ class PesquisaFicha
 	public $resultadosBusca;
 	public $wordCount;
 
-	public function __construct(string $termoBusca)
+	public function __construct(?string $termoBusca = null)
 	{
 		$this->termoBusca = $termoBusca;
 		$this->execute();
@@ -25,11 +26,19 @@ class PesquisaFicha
 		$parameters = request()->request;
 		
 		$this->realizaBusca = DB::table('fichas')->select('*');
-		$this->resultadosBusca = $this->realizaBusca
-			->orWhere('assunto', 'like', '%%' . $this->termoBusca . '%%')
-			->orWhere('resumo', 'like', '%%' . $this->termoBusca . '%%')
-			->orWhere('periodico', 'like', '%%' . $this->termoBusca . '%%')
-			->orWhere('comentarios', 'like', '%%' . $this->termoBusca . '%%')->get();
+
+		if ($this->termoBusca)
+		{
+			$this->resultadosBusca = $this->realizaBusca
+				->orWhere('assunto', 'like', '%%' . $this->termoBusca . '%%')
+				->orWhere('resumo', 'like', '%%' . $this->termoBusca . '%%')
+				->orWhere('periodico', 'like', '%%' . $this->termoBusca . '%%')
+				->orWhere('comentarios', 'like', '%%' . $this->termoBusca . '%%')->get();
+		}
+		else
+		{
+			$this->resultadosBusca = new Collection();
+		}
 	}
 
 	public function view(): \Illuminate\View\View
