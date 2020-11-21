@@ -15,16 +15,19 @@ class CreateFichasTable extends Migration
     {
         Schema::create('fichas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('assunto', 255)->nullable();
-            $table->char('periodico', 255)->nullable();
-            $table->char('data_edicao', 30)->nullable();
-            $table->char('duracao_edicao', 20)->nullable();
-            $table->char('pagina', 20)->nullable();
-            $table->text('resumo', 1000)->nullable();
-            $table->text('comentarios', 1000)->nullable();
-            $table->char('edicao', 255)->nullable();
+            $table->string('assunto')->nullable();
+            $table->string('periodico')->nullable();
+            $table->date('data_edicao')->nullable();
+            $table->date('duracao_edicao')->nullable();
+            $table->string('pagina')->nullable();
+            $table->text('resumo')->nullable();
+            $table->text('comentarios')->nullable();
+            $table->string('edicao')->nullable();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
-    }
+	}
+
     /**
      * Reverse the migrations.
      *
