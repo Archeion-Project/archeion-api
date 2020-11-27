@@ -10,21 +10,18 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav mr-auto">
-				@can('isAdmin')
-					<li class="nav-link"><a href="#dashboard"></a>Dashboard</li>
-					<li class="nav-link"><a href="/noticia">Notícias</a></li>
-					<li class="nav-link"><a href="#periodicos"></a>Periódicos</li>
+					<li class="nav-link"><a href="/dashboard"></a>Dashboard</li>
+					<li class="nav-link"><a href="{!! route('noticia.create') !!}">Notícias</a></li>
+					<li class="nav-link"><a href="/periodicos"></a>Periódicos</li>
 					<li>
 						@can('isAdmin')
 							<a class="nav-link registrar" href="{{ route('register') }}">{{ __('Usuários') }}</a>
 						@endcan
 					</li>
-
-				@endcan
 					
-				@can('isEditor')
+				<!-- @can('isEditor') -->
 					<li class="nav-link"><a href="#periodicos"></a>Periódicos</li>
-				@endcan
+				<!-- @endcan -->
 
 			</ul>
 			<!-- End of Left Side Of Navbar -->

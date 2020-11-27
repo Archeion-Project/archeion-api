@@ -6,12 +6,12 @@
 	
 	{!! $conteudo !!}
 
-	@isset($carousel)
-		{!! $carousel !!}
-	@endisset
-
 	@isset($barraBusca)
 		{!! $barraBusca !!}
+	@endisset
+
+	@isset($carousel)
+		{!! $carousel !!}
 	@endisset
 
 </div>

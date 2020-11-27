@@ -21,14 +21,9 @@ Route::get('/sobre', 'InicialController@sobre');
 
 Route::get('/noticia', 'InicialController@noticia');
 
-Route::get('/adicionar_noticia', 'InicialController@adicionarNoticia');
+Route::resource('noticia', 'NoticiaController');
 
 Route::get('/executaBusca',  'InicialController@buscar');
-
-Route::get('resultadosBusca', function () {
-	$users = App\User::paginate(15);
-	$users->withPath('custom/url');
-});
 
 Auth::routes();
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent;
-use Biblioweb\Ficha;
+use App\Ficha;
 
 class FichasTableSeeder extends Seeder
 {

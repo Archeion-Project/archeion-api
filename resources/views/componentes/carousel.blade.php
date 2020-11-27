@@ -18,8 +18,8 @@
 
 			<img class="d-block w-100" src="{{url('img/bmmm.jpg')}}" >
 			<div class="carousel-caption d-none d-md-block">
-				<a class="header-carousel" href="">{{ $slide[1] }}</a></p>
-				<a class="sub-header-carousel" href="">{{ $slide[2] }}</p>
+				<a class="header-carousel carousel" href="">{{ $slide[1] }}</a></p>
+				<a class="sub-header-carousel carousel" href="">{{ $slide[2] }}</p>
 			</div>
 
 		</div>
