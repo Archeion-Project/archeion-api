@@ -29,11 +29,12 @@ class PesquisaFicha
 
 		if ($this->termoBusca)
 		{
+			//INCLUIR JOIN PARA TITULO DE PERIODICO
 			$this->resultadosBusca = $this->realizaBusca
 				->orWhere('assunto', 'like', '%%' . $this->termoBusca . '%%')
 				->orWhere('resumo', 'like', '%%' . $this->termoBusca . '%%')
-				->orWhere('periodico', 'like', '%%' . $this->termoBusca . '%%')
-				->orWhere('comentarios', 'like', '%%' . $this->termoBusca . '%%')->get();
+				->orWhere('periodico_id', 'like', '%%' . $this->termoBusca . '%%')
+				->orWhere('comentario', 'like', '%%' . $this->termoBusca . '%%')->get();
 		}
 		else
 		{
