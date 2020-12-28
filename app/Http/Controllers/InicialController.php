@@ -7,6 +7,7 @@ use App\Http\Componentes\Carousel;
 use App\Http\Executar\PesquisaFicha;
 use App\Http\Executar\AdicionaNoticia;
 use Illuminate\Http\Request;
+use App\Noticia;
 
 class InicialController extends Controller
 {
@@ -26,12 +27,12 @@ public function __construct()
 
 public function index()
 {
-	$textoInicial = view('conteudo.textoInicial');
+	$titulo = view('conteudo.textoInicial');
 	$barraBusca = new BarraBusca();
 	$carousel = new Carousel(5);
 
 	return $this->conteudoTela
-		->with('conteudo', $textoInicial)
+		->with('titulo', $titulo)
 		->with('barraBusca', $barraBusca->view())
 		->with('carousel', $carousel->view());
 }
@@ -52,9 +53,9 @@ public function noticia()
 		->with('conteudo', $adNoticia);
 }
 
-public function adicionarNoticia()
+public function adicionarNoticia(Noticia $noticia)
 {
-	$adicionaNoticia = new AdicionaNoticia();
+	$adicionaNoticia = new AdicionaNoticia($noticia);
 
 	return $adicionaNoticia->view();
 }

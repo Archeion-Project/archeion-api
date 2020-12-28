@@ -8,31 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class Carousel extends Componentes
 {
-	public $slidesCarousel;
+	public $noticias;
 	public $itemsCarousel;
 	
 	public function __construct(int $num_items)
 	{
 		$this->bladeView = 'componentes.carousel';
-		$this->slidesCarousel = [];
-		$this->obterNoticiasCarousel($num_items);
+		$this->noticias = Noticia::obterItems()->all();
 		parent::__construct();
-	}
-
-	public function obterNoticiasCarousel(int $num_itens)
-	{
-		$noticia = new Noticia;
-		$this->itemsCarousel = $noticia->obterItems($num_itens);
-		return $this->arrayItemsCarousel($this->itemsCarousel);
-	}
-
-	public function arrayItemsCarousel($items)
-	{
-		foreach($items as $item)
-		{
-			$slideCarousel = array($item->id, $item->titulo, $item->subtitulo, $item->imagem);
-			array_push($this->slidesCarousel, $slideCarousel);
-		}
 	}
 
 	public function view(): \Illuminate\View\View
@@ -41,6 +24,6 @@ class Carousel extends Componentes
 		$carrousel = view($this->bladeView);
 
 		return $view->with('carousel')
-			->with('slidesCarousel', $this->slidesCarousel);
+			->with('noticias', $this->noticias);
 	}
 }

@@ -13,8 +13,7 @@ html {
 	
 }
 
-body{
-	background-image: url("/public/img/biblioteca-municipal-murilo-mendes-em-juiz-de-fora.jpg");
+#app {
 	font-family: 'Raleway';
 	background-color:#002200;
 	color: #ffffff;
@@ -41,15 +40,21 @@ a.footer-link {
 	color:black;
 }
 
-a.apagar-noticia:hover {
+a.editar-item-grid:hover {
 	font-size: 1em;
-	color:red;
+	color:blue;
 	font-weight: 700;
 }
 
-a.editar-noticia:hover {
+a.ocultar-item-grid:hover {
 	font-size: 1em;
-	color:darkgreen;
+	color:grey;
+	font-weight: 700;
+}
+
+a.apagar-item-grid:hover {
+	font-size: 1em;
+	color:red;
 	font-weight: 700;
 }
 
@@ -110,12 +115,20 @@ p.header {
 	font-size:2.887em;
 }
 
+.form-modal {
+	color:black;
+}
+
 p.sub-header {
 	font-size:1.802em
 }
 
 h5 {
 	color:red;
+}
+
+h2.black {
+	color:black;
 }
 
 thead.stick-head {
@@ -154,5 +167,3 @@ div.footer {
 	background-color: white;
 	margin-bottom: 0;
 }
-
-#loadOverlay{display: none;}

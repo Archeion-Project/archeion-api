@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Noticia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NoticiaController extends Controller
 {
@@ -24,9 +25,11 @@ class NoticiaController extends Controller
 	 */
 	public function create()
 	{
+		$confirmaSalvar = request()->confirmarSalvar ?? 'none';
 		$noticias = Noticia::orderBy('updated_at', 'desc')->get();
-		return view('conteudo.dashboard-noticias')
-			->with(['noticias' => $noticias]);
+		return view('conteudo.admin-noticias-dashboard')
+			->with(['noticias' => $noticias])
+			->with(['confirmaSalvar' => $confirmaSalvar]);
 	}
 
 	/**
@@ -40,8 +43,50 @@ class NoticiaController extends Controller
 		$noticia->titulo = $request->titulo;
 		$noticia->subtitulo = $request->subtitulo;
 		$noticia->texto = $request->texto;
-		$noticia->save();
-		//Lógica para imagens
+		$noticia->status = $request->status;
+
+		// // The file
+		// $filename = $request->imagem;
+
+		// // Set a maximum height and width
+		// $width = 400;
+		// $height = 300;
+
+		// // Get new dimensions
+		// list($width_orig, $height_orig) = getimagesize($filename);
+
+		// $ratio_orig = $width_orig/$height_orig;
+
+		// if ($width/$height > $ratio_orig)
+		// {
+		// 	$width = $height*$ratio_orig;
+		// }
+		// else
+		// {
+		// 	$height = $width/$ratio_orig;
+		// }
+
+		// // Resample
+		// $image_p = imagecreatetruecolor($width, $height);
+		// $image = imagecreatefromjpeg($filename);
+		// imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+		// $filePath = public_path() . '/img/' . $request->imagem->hashName();
+		// $dbPath = 'img/' . $request->imagem->hashName();
+		// imagejpeg($image_p, $filePath, 100);
+
+		// $noticia->filepath = $dbPath;
+		$confirmaSalvar = $noticia->save();
+
+		if ($confirmaSalvar)
+		{
+			$confirmaSalvar = 'true';
+		}
+		else
+		{
+			$confirmaSalvar = 'none';
+		}
+
+		return redirect()->route('noticia.create', ['confirmarSalvar' => $confirmaSalvar]);
 	}
 
 	/**
@@ -75,7 +120,10 @@ class NoticiaController extends Controller
 	 */
 	public function update(Request $request, Noticia $noticia)
 	{
-		//
+		$noticia->titulo = $request->titulo;
+		$noticia->subtitulo = $request->subtitulo;
+		$noticia->texto = $request->texto;
+		$noticia->save();
 	}
 
 	/**
