@@ -16,15 +16,15 @@ class CreateFichasTable extends Migration
         Schema::create('fichas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('assunto')->nullable();
-            $table->string('periodico')->nullable();
+            $table->unsignedBigInteger('periodico_id')->nullable();
             $table->date('data_edicao')->nullable();
             $table->date('duracao_edicao')->nullable();
             $table->string('pagina')->nullable();
             $table->text('resumo')->nullable();
-            $table->text('comentarios')->nullable();
+            $table->text('comentario')->nullable();
             $table->string('edicao')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->timestamp('created_at')->nullable();
+			$table->timestamp('created_at')->nullable();
         });
 	}
 

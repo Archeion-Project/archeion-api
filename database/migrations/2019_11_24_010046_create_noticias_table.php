@@ -17,8 +17,10 @@ class CreateNoticiasTable extends Migration
 			$table->bigIncrements('id');
 			$table->char('titulo', 255)->nullable();
 			$table->char('subtitulo', 255)->nullable();
-			$table->char('imagem', 30)->nullable();
 			$table->text('texto', 2000)->nullable();
+			$table->char('status', 1)->nullable();
+			$table->char('filepath', 255)->nullable();
+			$table->dateTime('deleted_at', 6)->nullable();
 			$table->timestamps();
 		});
 	}
