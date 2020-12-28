@@ -11,6 +11,8 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', 'InicialController@index');
 
 Route::get('/acervo','InicialController@acervo');
@@ -19,12 +21,17 @@ Route::get('/localizacao','InicialController@localização');
 
 Route::get('/sobre', 'InicialController@sobre');
 
-Route::get('/noticia', 'InicialController@noticia');
+Route::resource('noticia', 'NoticiaController')
+	->except(['update']);
 
-Route::resource('noticia', 'NoticiaController');
+Route::patch('/noticia-update/{noticia}', 'NoticiaController@update')->name('update-noticia');
+
+Route::resource('ficha', 'FichaController');
+// 	->except(['update']);
+
+// Route::patch('/ficha-update/{ficha}', 'FichaController@update')->name('update-ficha');
+
+Route::post('/crop-image', 'CropImageController@uploadCropImage')->name('upload-image');
 
 Route::get('/executaBusca',  'InicialController@buscar');
 
-Auth::routes();
-
-Route::get('/home', 'InicialController@index')->name('home');
