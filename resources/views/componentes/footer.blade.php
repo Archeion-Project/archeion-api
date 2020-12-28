@@ -1,71 +1,75 @@
-<!-- Footer -->
-<footer class="page-footer font-small pt-4">
+<div class="footer">
 
-<!-- Footer Links -->
-<div class="container-fluid text-center text-md-left">
+	<!-- Footer -->
+	<footer class="page-footer font-small pt-4">
 
-	<!-- Grid row -->
-	<div class="row">
+		<!-- Footer Links -->
+		<div class="container-fluid text-center text-md-left">
 
-	<!-- Grid column -->
-	<div class="col-md-6 mt-md-0 mt-3">
+			<!-- Grid row -->
+			<div class="row">
 
-		<!-- Content -->
-		<a class="footer-brand" href="{{ url('/') }}">
-			{{ config('app.name', 'BiblioWeb') }}
-		</a>
-		<p class="footer">Navegue pelo site do Setor de Memória da Biblioteca Municipal Murilo Mendes</p>
+			<!-- Grid column -->
+			<div class="col-md-6 mt-md-0 mt-3">
 
-	</div>
-	<!-- Grid column -->
+				<!-- Content -->
+				<a class="footer-brand" href="{{ url('/') }}">
+					{{ config('app.name', 'BiblioWeb') }}
+				</a>
+				<p class="footer">Navegue pelo site do Setor de Memória da Biblioteca Municipal Murilo Mendes</p>
 
-	<hr class="clearfix w-100 d-md-none pb-3">
+			</div>
+			<!-- Grid column -->
 
-	<!-- Grid column -->
-	<div class="col-md-3 mb-md-0 mb-3">
+			<hr class="clearfix w-100 d-md-none pb-3">
 
-		<!-- Links -->
-		<h5 class="text-uppercase">Conteúdo</h5>
+			<!-- Grid column -->
+			<div class="col-md-3 mb-md-0 mb-3">
 
-		<ul class="list-unstyled">
+				<!-- Links -->
+				<h5 class="text-uppercase">Conteúdo</h5>
 
-			<li><a class="footer-link" href="/acervo">Acervo</a></li>
-			<li><a class="footer-link" href="/localizacao">Localização</a></li>
-			<li><a class="footer-link" href="/sobre">Sobre o projeto</a></li>
-			@guest
+				<ul class="list-unstyled">
 
-				<li class="nav-item">
-					<a class="footer-link" href="{{ route('login') }}">{{ __('Administração') }}</a>
-				</li>
+					<li><a class="footer-link" href="/acervo">Acervo</a></li>
+					<li><a class="footer-link" href="/localizacao">Localização</a></li>
+					<li><a class="footer-link" href="/sobre">Sobre o projeto</a></li>
+					@guest
 
-			@endguest
+						<li class="nav-item">
+							<a class="footer-link" href="{{ route('login') }}">{{ __('Administração') }}</a>
+						</li>
 
-		</ul>
+					@endguest
 
-	</div>
-	<!-- Grid column -->
+				</ul>
 
-	<!-- Grid column -->
-	<div class="col-md-3 mb-md-0 mb-3">
+			</div>
+			<!-- Grid column -->
+
+			<!-- Grid column -->
+			<div class="col-md-3 mb-md-0 mb-3">
 
 
 
-	</div>
-	<!-- Grid column -->
+			</div>
+			<!-- Grid column -->
 
-	</div>
-	<!-- Grid row -->
+			</div>
+			<!-- Grid row -->
+
+		</div>
+		<!-- Footer Links -->
+
+		<!-- Copyright -->
+		<div class="text-center py-3">
+
+			<p class="footer">© 2020 Instituto Federal do Sudeste de Minas Gerais</p>
+
+		</div>
+		<!-- Copyright -->
+
+	</footer>
+	<!-- Footer -->
 
 </div>
-<!-- Footer Links -->
-
-<!-- Copyright -->
-<div class="text-center py-3">
-
-	<p class="footer">© 2020 Instituto Federal do Sudeste de Minas Gerais</p>
-
-</div>
-<!-- Copyright -->
-
-</footer>
-<!-- Footer -->

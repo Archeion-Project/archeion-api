@@ -2,29 +2,32 @@
 
 	<ol class="carousel-indicators">
 
-	@foreach($slidesCarousel as $slide)
+		@foreach ($noticias as $noticia)
 
-		<li @if ($slide[0] == '1') class="active" @endif data-target="#carouselExampleIndicators" data-slide-to="{{ $slide[0] - 1 }}"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="{{ key($noticias) }}" 
+			@if (!key($noticias)) class="active" @endif></li>
 
-	@endforeach
-	
+			@php(next($noticias))
+
+		@endforeach
 	</ol>
 
 	<div class="carousel-inner">
 
-	@foreach($slidesCarousel as $slide)
+		@foreach ($noticias as $noticia)
 
-		<div @if ($slide[0] == '1') class="carousel-item active" @else class="carousel-item" @endif>
+			<div @if (!key($noticias)) class="carousel-item active" @else class="carousel-item" @endif>
+				<img class="d-block w-100" src="{{ url('img/' . $noticia->filepath) }}" alt="First slide">
 
-			<img class="d-block w-100" src="{{url('img/bmmm.jpg')}}" >
-			<div class="carousel-caption d-none d-md-block">
-				<a class="header-carousel carousel" href="">{{ $slide[1] }}</a></p>
-				<a class="sub-header-carousel carousel" href="">{{ $slide[2] }}</p>
+				<div class="carousel-caption d-none d-md-block">
+					<h5><a class="header-carousel carousel" href="">{{ $noticia->titulo }}</a></h5>
+					<p><a class="sub-header-carousel carousel" href="">{{ $noticia->subtitulo }}</a><p>
+				</div>
 			</div>
-
-		</div>
-
-	@endforeach
+			
+			@php(next($noticias))
+			
+		@endforeach
 
 	</div>
 
@@ -37,5 +40,7 @@
 		<span class="carousel-control-next-icon" aria-hidden="true"></span>
 		<span class="sr-only">Próximo</span>
 	</a>
-
+	
 </div>
+
+<br>

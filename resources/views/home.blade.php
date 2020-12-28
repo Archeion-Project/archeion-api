@@ -1,40 +1,38 @@
 @extends('layouts.app')
 
-{!! $navbar !!}
+@section('content')
 
-<div class="container">
-	<div class="barraBusca">
+	<div class="container">
+		<div class="barraBusca">
 
-		{!! $barraBusca !!}
-		<h2>Resultados encontrados para "{!! $termoBusca !!}": {{ $wordCount }}</h2>
+			{!! $barraBusca !!}
+			<h2>Resultados encontrados para "{!! $termoBusca !!}": {{ $wordCount }}</h2>
 
-	</div>
+		</div>
 
-	<div class="gridResultados">
-		{!! $gridResultados !!}
-	</div>
+		<div class="gridResultados">
+			{!! $gridResultados !!}
+		</div>
 
-	<div class="footer">
-		{!! $footer !!}
-	</div>
+		@if(Auth::user())
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+					<div class="card">
+						<div class="card-header">Dashboard</div>
 
-	@if(Auth::user())
-		<div class="row justify-content-center">
-			<div class="col-md-8">
-				<div class="card">
-					<div class="card-header">Dashboard</div>
+						<div class="card-body">
+							@if (session('status'))
+								<div class="alert alert-success" role="alert">
+									{{ session('status') }}
+								</div>
+							@endif
 
-					<div class="card-body">
-						@if (session('status'))
-							<div class="alert alert-success" role="alert">
-								{{ session('status') }}
-							</div>
-						@endif
-
-						You are logged in!
+							You are logged in!
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	@endif
-</div>
+		@endif
+	</div>
+
+@endsection

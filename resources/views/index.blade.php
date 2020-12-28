@@ -1,23 +1,26 @@
 @extends('layouts.app')
 
-	{!! $navbar !!}
+@section('content')
 
-<div class="container">
-	
-	{!! $conteudo !!}
+	<div class="container">
+		
+		@isset($titulo)
+			{!! $titulo !!}
+		@endisset
 
-	@isset($barraBusca)
-		{!! $barraBusca !!}
-	@endisset
+		@isset($barraBusca)
+			{!! $barraBusca !!}
+		@endisset
 
-	@isset($carousel)
-		{!! $carousel !!}
-	@endisset
+		@isset($carousel)
+			{!! $carousel !!}
+		@endisset
 
-</div>
+		@isset($conteudo)
+			{!! $conteudo !!}
+		@endisset
 
-<div class="footer">
+	</div>
 
-	{!! $footer !!}
 
-</div>
+@endsection

@@ -12,6 +12,7 @@
 			<ul class="navbar-nav mr-auto">
 					<li class="nav-link"><a href="/dashboard"></a>Dashboard</li>
 					<li class="nav-link"><a href="{!! route('noticia.create') !!}">Notícias</a></li>
+					<li class="nav-link"><a href="{!! route('ficha.create') !!}">Fichas</a></li>
 					<li class="nav-link"><a href="/periodicos"></a>Periódicos</li>
 					<li>
 						@can('isAdmin')
