@@ -3,12 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Noticia extends Model
 {
 
+	const APAGADO = 0;
+	const OCULTO = 1;
+	const PUBLICADO = 2;
+
 	protected $fillable = [
-		'titulo', 'subtitulo', 'imagem', 'texto',
+		'titulo', 'subtitulo', 'imagem', 'texto', 'status',
 	];
 
 	protected $titulo;
@@ -18,9 +23,29 @@ class Noticia extends Model
 
 	//Banco de dados
 
-	public function obterItems(int $qtd_noticias)
+	static public function obterItems()
 	{
-		return $this::orderBy('updated_at', 'desc')->take($qtd_noticias)->get();
+		return Noticia::where('status', self::PUBLICADO)->orderBy('updated_at', 'desc')->limit(5)->get();
+	}
+
+	public function getStatus()
+	{
+		$texto = null;
+
+		if ($this->status == self::APAGADO)
+		{
+			$texto = 'Apagado';
+		}
+		elseif ($this->status == self::OCULTO)
+		{
+			$texto = 'Oculto';
+		}
+		elseif ($this->status == self::PUBLICADO)
+		{
+			$texto = 'Publicado';
+		}
+
+		return $texto;
 	}
 
 }
