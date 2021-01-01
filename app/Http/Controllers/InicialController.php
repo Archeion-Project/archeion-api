@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Componentes\BarraBusca;
 use App\Http\Componentes\Carousel;
 use App\Http\Executar\PesquisaFicha;
-use App\Http\Executar\AdicionaNoticia;
 use Illuminate\Http\Request;
 use App\Noticia;
 
@@ -43,21 +42,6 @@ public function acervo()
 
 	return $this->conteudoTela
 		->with('conteudo', $acervo);
-}
-
-public function noticia()
-{
-	$adNoticia = view('conteudo.adicionarNoticia');
-
-	return $this->conteudoTela
-		->with('conteudo', $adNoticia);
-}
-
-public function adicionarNoticia(Noticia $noticia)
-{
-	$adicionaNoticia = new AdicionaNoticia($noticia);
-
-	return $adicionaNoticia->view();
 }
 
 public function localização()
