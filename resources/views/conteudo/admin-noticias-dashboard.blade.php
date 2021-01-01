@@ -19,8 +19,8 @@
 				<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Digite aqui o título da notícia">
 			</div>
 			<div class="form-group col-sm md-form">
-				<label for="inputPeriodico">Status da Publicação</label>
-				<select class="custom-select" id="periodico" name="periodico">
+				<label for="inputStatus">Status da Publicação</label>
+				<select class="custom-select" id="status" name="status">
 					<option value="0">Apagado</option>
 					<option value="1">Oculto</option>
 					<option value="2">Publicado</option>

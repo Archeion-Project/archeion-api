@@ -12,7 +12,7 @@
 		@foreach ($resultadosBusca as $resultadoBusca)
 			<tr>
 				<td>{{ $resultadoBusca->assunto }}</td>
-				<td>{{ $resultadoBusca->periodico }}</td>
+				<td>{{ \App\Periodico::find($resultadoBusca->periodico_id)->titulo }}</td>
 				<td>{{ (new \Carbon\Carbon($resultadoBusca->data_edicao))->format('d/m/Y') }}</td>
 				<td>{{ $resultadoBusca->resumo }}</td>
 				<td>{{ $resultadoBusca->comentario }}</td>

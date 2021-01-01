@@ -132,9 +132,9 @@
 						</div>
 						<div class="modal-body-periodico form-modal form-group col-md">
 							<label for="modal-subtitulo">Periódico</label>
-							<select class="modal-body-periodico form-control custom-select" id="modal-periodico" value="{{$ficha->periodico}}" name="periodico">
+							<select class="modal-body-periodico form-control custom-select" id="modal-periodico" value="{{ $ficha->periodico_id }}" name="periodico">
 								@foreach ($periodicos as $periodico)
-								<option value="{{ $periodico->id }}">{{ $periodico->titulo }}</option>
+									<option value="{{ $periodico->id }}" >{{ $periodico->titulo }}</option>
 								@endforeach
 							</select>
 						</div>
