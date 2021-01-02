@@ -36,9 +36,9 @@ class FichasTableSeeder extends Seeder
 				$data_edicao->day = substr($str, -8, -6);
 			}
 
-			$duracao_edicao = '0000-01-01';
+			$duracao_edicao = null;
 
-			if (!$a[3])
+			if ($a[3])
 			{
 				$duracao_edicao = new \Carbon\Carbon;
 				$str = ($a[3]);
@@ -52,6 +52,10 @@ class FichasTableSeeder extends Seeder
 				{
 					$duracao_edicao->day = substr($str, -8, -6);
 				}
+			}
+			else
+			{
+				$duracao_edicao = $data_edicao;
 			}
 
 			$ficha->assunto = $a[0];
