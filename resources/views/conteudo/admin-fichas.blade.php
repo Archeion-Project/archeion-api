@@ -3,13 +3,43 @@
 @section('content')
 
 <div class="container col-sm">
-	<form action="{!! route('ficha.store') !!}" method="put" enctype="multipart/form-data">
+	<br>
+
+		<!-- Alerts -->
+
+		@isset($mensagem)
+			@if ($mensagem == 'store')
+				<div class="alert alert-success" id="div-confirmacao" role="alert">
+					Ficha Catalográfica Cadastrada Com Sucesso!
+				</div>
+			@elseif ($mensagem == 'store-error')
+				<div class="alert alert-danger" id="div-confirmacao" role="alert">
+					Erro Ao Cadastrar Ficha Catalográfica!
+				</div>
+			@elseif ($mensagem == 'update')
+				<div class="alert alert-success" id="div-confirmacao" role="alert">
+					Ficha Catalográfica Atualizada Com Sucesso!
+				</div>
+			@elseif ($mensagem == 'update-error')
+				<div class="alert alert-danger" id="div-confirmacao" role="alert">
+					Erro Ao Atualizar Ficha Catalográfica!
+				</div>
+			@elseif ($mensagem == 'destroy')
+				<div class="alert alert-success" id="div-confirmacao" role="alert">
+					Ficha Catalográfica Apagada Com Sucesso!
+				</div>
+			@elseif ($mensagem == 'destroy-error')
+				<div class="alert alert-danger" id="div-confirmacao" role="alert">
+					Erro Ao Apagar Ficha Catalográfica!
+				</div>
+			@endif
+		@endisset
+
+		<!-- Formulário -->
+
+	<form action="{!! route('ficha.store') !!}" method="POST" enctype="multipart/form-data">
 		@csrf
-		@method('PUT')
 		<br>
-		<div class="alert alert-success" style="display: {!! $confirmaSalvar !!};" id="div-confirmacao" role="alert">
-			  Ficha Catalográfica cadastrada com sucesso!
-		</div>
 		<h2>Adicionar Ficha Catalográfica</h2>
 		<br>
 		<div class="row">
@@ -21,7 +51,7 @@
 				<label for="inputPeriodico">Periódico</label>
 				<select class="custom-select" id="periodico" name="periodico">
 					@foreach ($periodicos as $periodico)
-						<option value="{{!! $periodico->id !!}}">{{ $periodico->titulo }}</option>
+						<option value="{{ $periodico->id }}">{{ $periodico->titulo }}</option>
 					@endforeach
 				</select>
 			</div>
@@ -33,15 +63,15 @@
 		<div class="row">
 			<div class="form-group col-sm">
 				<label for="inputDataEdicao">Data da Edição</label>
-				<input type="text" class="form-control" id="data_edicao" name="data_edicao" placeholder="Data da Edição">
+				<input type="text" class="form-control datepicker" id="data_edicao" name="data_edicao" placeholder="Data da Edição">
 			</div>
 			<div class="form-group col-sm">
 				<label for="inputEdicao">Edição</label>
 				<input type="text" class="form-control" id="edicao" name="edicao" placeholder="Edição">
 			</div>
 			<div class="form-group col-sm">
-				<label for="inputDuracaoEdicao">Escolha a duração da Edição</label>
-				<input type="text" class="form-control" id="duracao_edicao" name="duracao_edicao" placeholder="Duração da Edição">
+				<label for="inputDuracaoEdicao">Escolha a Duração da Edição</label>
+				<input type="text" class="form-control datepicker" id="duracao_edicao" name="duracao_edicao" placeholder="Duração da Edição">
 			</div>
 		</div>
 		<div class="row">
@@ -59,6 +89,8 @@
 		</div>
 	</form>
 </div>
+
+<!-- Grid -->
 
 <div class="container col-sm">
 	<br>
@@ -87,7 +119,7 @@
 					<td>{{ \App\Periodico::find($ficha->periodico_id)->titulo }}</td>
 					<td>{{ (new \Carbon\Carbon($ficha->data_edicao))->format('d/m/Y') }}</td>
 					<td>{{ $ficha->edicao }}</td>
-					<td>{{ $ficha->duracao_edicao }}</td>
+					<td>{{ $ficha->data_edicao->diffInDays($ficha->duracao_edicao) }}</td>
 					<td>{{ $ficha->pagina }}</td>
 					<td>{{ $ficha->resumo }}</td>
 					<td>{{ $ficha->comentario }}</td>
@@ -99,13 +131,12 @@
 						<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Clique
 						</button>
-						<div class="dropdown-menu">
-						<!-- Dropdown menu links -->
-							<h6 class="dropdown-header">{{ $ficha->assunto }}</h6>
-							<a class="dropdown-item" id="editar-item-grid" data-toggle="modal" data-target="#editar-modal" data-whatever="{{ $ficha }}">Editar</a>
-							<a class="dropdown-item ocultar-item-grid" href="{{ route('ficha.destroy', $ficha) }}">Ocultar</a>
-							<a class="dropdown-item apagar-item-grid" href="{{ route('ficha.destroy', $ficha) }}">Apagar</a>
-						</div>
+							<div class="dropdown-menu">
+							<!-- Dropdown menu links -->
+								<h6 class="dropdown-header">{{ $ficha->assunto }}</h6>
+								<a href="" class="dropdown-item" id="editar-item-grid" data-toggle="modal" data-target="#editar-modal" data-whatever="{{ $ficha }}">Editar</a>
+								<a href="" class="dropdown-item apagar-item-grid" data-toggle="modal" data-target="#apagar-modal" data-whatever="{{ $ficha }}">Apagar</a>
+							</div>
 						</div>
 					</td>
 				</tr>
@@ -115,13 +146,14 @@
 </div>
 
 <!-- Editar Modal -->
+
 <div class="modal fade" id="editar-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 		<div class="modal-content">
-			<div class="modal-header">text
+			<div class="modal-header">
 				<h2 class="modal-title black">Editar Ficha</h2>
 			</div>
-			<form action="{!! route('ficha.update', $ficha) !!}" method="post" enctype="multipart/form-data">
+			<form action="{!! route('ficha.update', $ficha) !!}" id="modal-form" method="POST" enctype="multipart/form-data">
 				@csrf
 				@method('PATCH')
 				<div class="container col-sm">
@@ -131,10 +163,16 @@
 							<input type="text" class="form-control" id="modal-assunto" value="{{$ficha->assunto}}" name="assunto" placeholder="Digite aqui o assunto da ficha">
 						</div>
 						<div class="modal-body-periodico form-modal form-group col-md">
-							<label for="modal-subtitulo">Periódico</label>
-							<select class="modal-body-periodico form-control custom-select" id="modal-periodico" value="{{ $ficha->periodico_id }}" name="periodico">
+							<label for="modal-periodico">Periódico</label>
+							<select class="modal-body-periodico form-control custom-select" id="modal-periodico" name="periodico">
 								@foreach ($periodicos as $periodico)
-									<option value="{{ $periodico->id }}" >{{ $periodico->titulo }}</option>
+
+									@if ($ficha->periodico_id == $periodico->id)
+										<option value="{{ $periodico->id }}" selected>{{ $periodico->titulo }}</option>
+									@else
+										<option value="{{ $periodico->id }}">{{ $periodico->titulo }}</option>
+									@endif
+	
 								@endforeach
 							</select>
 						</div>
@@ -172,6 +210,23 @@
 					<button type="submit" class="btn btn-primary">Atualizar Ficha</button>
 				</div>
 			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="apagar-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-md modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title black">Confirma Apagar Ficha?</h2>
+			</div>
+				<form action="{{ route('ficha.destroy', $ficha) }}" id="modal-form" method="DELETE">
+					<div class="form-group col-md">
+						<button type="submit" class="btn btn-danger">Sim</button>
+						<button type="button" class="btn btn-info" data-dismiss="modal">Não</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
