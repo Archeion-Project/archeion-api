@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Periodico;
 use Illuminate\Http\Request;
+use App\Http\Controllers\BibliowebController;
 
-class PeriodicoController extends Controller
+class PeriodicoController extends BibliowebController
 {
     /**
      * Display a listing of the resource.

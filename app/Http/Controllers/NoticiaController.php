@@ -6,7 +6,7 @@ use App\Noticia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class NoticiaController extends Controller
+class NoticiaController extends BibliowebController
 {
 	/**
 	 * Display a listing of the resource.
