@@ -98,10 +98,9 @@ class FichaController extends BibliowebController
 		$ficha->resumo = $request->resumo;
 		$ficha->comentario = $request->comentario;
 		$ficha->edicao = $request->edicao;
-		$mensagem = null;
-		$mensagem = $ficha->save() ? 'update' : 'update-error';
+		$ficha->save();
 
-		return redirect()->route('ficha.create', ['mensagem' => $mensagem]);
+		return redirect()->route('ficha.create');
 	}
 
 	/**

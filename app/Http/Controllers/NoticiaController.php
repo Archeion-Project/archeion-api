@@ -44,37 +44,8 @@ class NoticiaController extends BibliowebController
 		$noticia->subtitulo = $request->subtitulo;
 		$noticia->texto = $request->texto;
 		$noticia->status = $request->status;
+		$noticia->filepath = $request->filepath;
 
-		// // The file
-		// $filename = $request->imagem;
-
-		// // Set a maximum height and width
-		// $width = 400;
-		// $height = 300;
-
-		// // Get new dimensions
-		// list($width_orig, $height_orig) = getimagesize($filename);
-
-		// $ratio_orig = $width_orig/$height_orig;
-
-		// if ($width/$height > $ratio_orig)
-		// {
-		// 	$width = $height*$ratio_orig;
-		// }
-		// else
-		// {
-		// 	$height = $width/$ratio_orig;
-		// }
-
-		// // Resample
-		// $image_p = imagecreatetruecolor($width, $height);
-		// $image = imagecreatefromjpeg($filename);
-		// imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
-		// $filePath = public_path() . '/img/' . $request->imagem->hashName();
-		// $dbPath = 'img/' . $request->imagem->hashName();
-		// imagejpeg($image_p, $filePath, 100);
-
-		// $noticia->filepath = $dbPath;
 		$confirmaSalvar = $noticia->save();
 
 		if ($confirmaSalvar)
@@ -118,12 +89,15 @@ class NoticiaController extends BibliowebController
 	 * @param  \App\Noticia  $noticia
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Noticia $noticia)
+	public function update(Request $request, Noticia $noticium)
 	{
-		$noticia->titulo = $request->titulo;
-		$noticia->subtitulo = $request->subtitulo;
-		$noticia->texto = $request->texto;
-		$noticia->save();
+		$noticium->titulo = $request->titulo;
+		$noticium->subtitulo = $request->subtitulo;
+		$noticium->status = $request->status;
+		$noticium->texto = $request->texto;
+		$noticium->save();
+
+		return redirect()->route('noticia.create');
 	}
 
 	/**
