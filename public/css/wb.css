@@ -19,7 +19,7 @@ html {
 	color: #ffffff;
 }
 
-a {
+a:link {
 	text-decoration: none;
 }
 
@@ -90,6 +90,13 @@ height: 300px;
 left: 0%;
 }
 
+img.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 20%;
+}
+
 input {
 	font-family: 'Raleway', Helvetica, Arial, sans-serif;
 	margin-top: 10px;
@@ -127,6 +134,10 @@ h5 {
 	color:red;
 }
 
+h5.white {
+	color:white;
+}
+
 h2.black {
 	color:black;
 }
@@ -149,10 +160,22 @@ div.card {
 div.index {
 margin-top: 0px;
 }
-					
-table {
+
+table#grid-lista {
 	font-size: 13px;
 	font-family: 'Source Code Pro', monospace;
+	color: white;
+}
+
+table.table-hover {
+	font-size: 13px;
+	font-family: 'Source Code Pro', monospace;
+	color: white;
+}
+
+tr#grid-items:hover {
+	background-color:#004400;
+
 }
 
 div.form-busca {
