@@ -13,16 +13,44 @@
 		<link rel="dns-prefetch" href="//fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css?family=Nunito|Source+Code+Pro|IBM+Plex+Mono|Raleway:300&display=swap" rel="stylesheet">
 
-		<!-- Styles -->
-		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-		<link href="{{ asset('css/wb.css') }}" rel="stylesheet">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 		<!-- Scripts -->
+		<script src="{{ asset('js/app.js') }}"></script>
+		<script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			  crossorigin="anonymous"></script>
+		<script
+			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+			  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+			  crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+		<!-- Styles -->
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-		<script src="//code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
+		<!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+		<link href="{{ asset('css/wb.css') }}" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+		<style type="text/css">
+			img {
+				display: block;
+				max-width: 100%;
+			}
+			.preview {
+				overflow: hidden;
+				width: 160px; 
+				height: 160px;
+				margin: 10px;
+				border: 1px solid red;
+			}
+			.modal-lg{
+				max-width: 1000px !important;
+			}
+		</style>
+
 		
 	</head>
 
@@ -39,26 +67,27 @@
 
 	</body>
 
-	<script>
+	<script type="text/javascript">
 
 		$(document).ready(function() {
 		/**
 		* for showing edit item popup
 		*/
-			$('#editar-modal').on('shown.bs.modal', function (event) {
-
-				var button = $(event.relatedTarget) // Button that triggered the modal
+			$('body').on('click', '#editar-item-grid', function (event) {
+				var button = $(event.currentTarget) // Button that triggered the modal
 				var recipient = button.data('whatever') // Extract info from data-* attributes
 				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-				var modal = $(this)
-				modal.find('#modal-assunto').val(recipient.assunto)
-				modal.find('#modal-periodico').val(recipient.periodico_id)
-				modal.find('#modal-data_edicao').val(recipient.data_edicao)
-				modal.find('#modal-duracao_edicao').val(recipient.duracao_edicao)
-				modal.find('#modal-pagina').val(recipient.pagina)
-				modal.find('#modal-resumo').val(recipient.resumo)
-				modal.find('#modal-comentario').val(recipient.comentario)
+				var modal = $('#editar-modal')
+
+				// Atribui aos inputs do modal os atributos do 
+				// objeto (noticia, ficha, etc) que vem do link editar
+				// Importante: os ids dos inputs dos modais devem ter
+				// nome identico aos atributos do objeto
+
+				jQuery.each(recipient, function(name, value) {
+					modal.find('#modal-' + name).val(value)
+				});
 
 				//Substitui id da ficha em modal-form > action > route
 				var str = $('#modal-form').attr('action');
@@ -73,13 +102,13 @@
 			$('#apagar-modal').on('shown.bs.modal', function (event) {
 
 				var button = $(event.relatedTarget) // Button that triggered the modal
-				console.log(button)
 				var recipient = button.data('whatever') // Extract info from data-* attributes
 				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 				var modal = $(this)
 
 				//Substitui id da ficha em modal-form > action > route
 				var str = $('#modal-form').attr('action');
+				console.log(str)
 				var i = str.lastIndexOf('/');
 				if (i != -1) {
 					str = str.substr(0, i + 1) + recipient.id;
@@ -88,8 +117,12 @@
 
 			})
 
+			setTimeout(function() {
+				$(".alert").fadeOut().empty();
+			}, 3000);
+
 			$.datepicker.setDefaults({
-				dateFormat: 'dd/mm/yy',
+				dateFormat: 'dd-mm-yy',
 				changeMonth: true,
 				changeYear: true,
 				showOtherMonths: true,
@@ -103,22 +136,27 @@
 			});
 
 			$( function() {
-				var dateFormat = "dd/mm/yy",
-					from = $( "#data_edicao" )
-						.datepicker({
-							defaultDate: "+1w",
-							changeMonth: true,
-						})
-						.on( "change", function() {
-							to.datepicker( "option", "minDate", getDate( this ) );
-						}),
-					to = $( "#duracao_edicao" ).datepicker({
-						defaultDate: "+1w",
-						changeMonth: true,
-					})
-					.on( "change", function() {
-						from.datepicker( "option", "maxDate", getDate( this ) );
-					});
+				var dateFormat = "dd-mm-yy",
+				to = $('#duracao_edicao').datepicker({
+					defaultDate: "+1w",
+					changeMonth: true,
+				});
+
+				$("#data_edicao").datepicker({
+					onSelect: function(dateStr) 
+					{
+						$('#duracao_edicao').val(dateStr);
+						to.datepicker("option", "minDate", dateStr);
+					}
+				});
+
+				$("#modal-data_edicao").datepicker({
+					onSelect: function(dateStr) 
+					{
+						$('#modal-duracao_edicao').val(dateStr);
+						to.datepicker("option", "minDate", dateStr);
+					}
+				});
 
 				function getDate( element ) {
 					var date;
@@ -131,43 +169,82 @@
 					return date;
 				}
 			});
-	
-	// $(document).on('click', '#editar-item-grid', function (event) {
 
-			// 	$(this).addClass('edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
 
-			// 	var options = {
-			// 		'backdrop': 'static'
-			// 	};
 
-			// 	$('#editar-modal').modal(options)
-
-			// })
-
-			// // on modal show
-			// $('#editar-modal').on('shown.bs.modal', function() {
-			// 	var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
-
-			// 	// get the data
-			// 	var id = el.data('whatever');
-
-			// 	// fill the data in the input fields
-			// 	$('#modal-assunto').text(id.assunto)
-			// 	$('#modal-periodico').text(id.periodico)
-			// 	$('#modal-data_edicao').text(id.data_edicao)
-			// 	$('#modal-duracao_edicao').text(id.duracao_edicao)
-			// 	$('#modal-pagina').text(id.pagina)
-			// 	$('#modal-resumo').text(id.resumo)
-			// 	$('#modal-comentario').text(id.comentario)
-
-			// })
-
-			// // on modal hide
-			// $('#editar-modal').on('hide.bs.modal', function() {
-			// 	$('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
-			// 	$("#editar-modal").trigger("reset");
-			// })
-	
+			var $modal = $('#modal-crop');
+			var image = document.getElementById('image');
+			var cropper;
+			$("body").on("change", ".image", function (e) {
+				var files = e.target.files;
+				var done = function (url) {
+					image.src = url;
+					$modal.modal('show');
+				};
+				var reader;
+				var file;
+				var url;
+				if (files && files.length > 0) {
+					file = files[0];
+					if (URL) {
+						done(URL.createObjectURL(file));
+					} else if (FileReader) {
+						reader = new FileReader();
+						reader.onload = function (e) {
+							done(reader.result);
+						};
+						reader.readAsDataURL(file);
+					}
+				}
+			});
+			$modal.on('shown.bs.modal', function () {
+				cropper = new Cropper(image, {
+					aspectRatio: 1.75,
+					viewMode: 1,
+					preview: '.preview'
+				});
+			}).on('hidden.bs.modal', function () {
+				cropper.destroy();
+				cropper = null;
+			});
+			$("#crop").click(function () {
+				canvas = cropper.getCroppedCanvas({
+					width: 700,
+					height: 400,
+				});
+				canvas.toBlob(function (blob) {
+					url = URL.createObjectURL(blob);
+					var reader = new FileReader();
+					reader.readAsDataURL(blob);
+					reader.onloadend = function () {
+						var base64data = reader.result;
+						$.ajax({
+							type: "POST",
+							dataType: "json",
+							// Rota para o CropImageController
+							url: "crop-image-upload",
+							data: {
+								'_token': $('meta[name="_token"]').attr('content'),
+								'image': base64data
+							},
+							success: function (data) {
+								/*
+									Após o ajax POST request, o CropImageController
+									salva a imagem e retorna um json com o atributo filepath.
+									Aqui, este filepath é attribuído ao <input hidden>
+								*/
+								$('#filepath').val(data.filePath);
+								$modal.modal('hide');
+							}
+						});
+					}
+				});
+			})
 		})
 
 	</script>
