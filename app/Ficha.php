@@ -12,7 +12,7 @@ class Ficha extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'assunto', 'periodico', 'data_edicao', 'duracao_edicao', 'pagina', 'resumo', 'comentario', 'edicao', 'updated_at', 'crated_at',
+		'assunto', 'periodico', 'data_edicao', 'duracao_edicao', 'pagina', 'resumo', 'comentario', 'edicao', 'updated_at', 'created_at',
 	];
 
 	/**
@@ -23,5 +23,6 @@ class Ficha extends Model
 	protected $casts = [
 		'email_verified_at' => 'datetime',
 		'data_edicao' => 'datetime',
+		'duracao_edicao' => 'datetime',
 	];
 }

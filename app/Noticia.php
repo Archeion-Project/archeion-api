@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Log;
 class Noticia extends Model
 {
 
-	const APAGADO = 0;
-	const OCULTO = 1;
-	const PUBLICADO = 2;
+	const APAGADO = 1;
+	const OCULTO = 2;
+	const PUBLICADO = 3;
 
 	protected $fillable = [
-		'titulo', 'subtitulo', 'imagem', 'texto', 'status',
+		'titulo', 'subtitulo', 'imagem', 'texto', 'status', 'updated_at', 'created_at', 
 	];
 
 	protected $titulo;
@@ -47,5 +47,13 @@ class Noticia extends Model
 
 		return $texto;
 	}
+
+	protected $casts = [
+		'email_verified_at' => 'datetime',
+		'data_edicao' => 'datetime',
+		'updated_at' => 'datetime',
+		'created_at' => 'datetime',
+	];
+
 
 }
