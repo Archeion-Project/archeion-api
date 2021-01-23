@@ -61,10 +61,17 @@
 		</div>
 		<!-- Footer Links -->
 
+		<div>
+			<img class="center" src="{{ url('img/' . 'iflogo.jpeg') }}" alt="">
+		</div>
+
+
 		<!-- Copyright -->
 		<div class="text-center py-3">
 
-			<p class="footer">© 2020 Instituto Federal do Sudeste de Minas Gerais</p>
+			<p class="footer">© {{ \Carbon\Carbon::now()->format('Y') }} Instituto Federal do Sudeste de Minas Gerais
+			<br>
+			Campus Juiz de Fora</p>
 
 		</div>
 		<!-- Copyright -->

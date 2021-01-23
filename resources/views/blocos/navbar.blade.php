@@ -10,10 +10,10 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav mr-auto">
-					<li class="nav-link"><a href="/dashboard"></a>Dashboard</li>
-					<li class="nav-link"><a href="{!! route('noticia.create') !!}">Notícias</a></li>
-					<li class="nav-link"><a href="{!! route('ficha.create') !!}">Fichas</a></li>
-					<li class="nav-link"><a href="/periodicos"></a>Periódicos</li>
+					<li><a class="nav-link" href="/dashboard">Dashboard</a></li>
+					<li><a class="nav-link" href="{!! route('noticia.create') !!}">Notícias</a></li>
+					<li><a class="nav-link" href="{!! route('ficha.create') !!}">Fichas</a></li>
+					<li><a class="nav-link" href="/periodicos">Periódicos</a></li>
 					<li>
 						@can('isAdmin')
 							<a class="nav-link registrar" href="{{ route('register') }}">{{ __('Usuários') }}</a>
@@ -21,7 +21,7 @@
 					</li>
 					
 				<!-- @can('isEditor') -->
-					<li class="nav-link"><a href="#periodicos"></a>Periódicos</li>
+					<li class="nav-link"><a href="#periodicos">Periódicos</a></li>
 				<!-- @endcan -->
 
 			</ul>

@@ -1,4 +1,4 @@
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 
 	<ol class="carousel-indicators">
 
@@ -17,7 +17,7 @@
 		@foreach ($noticias as $noticia)
 
 			<div @if (!key($noticias)) class="carousel-item active" @else class="carousel-item" @endif>
-				<img class="d-block w-100" src="{{ url('img/' . $noticia->filepath) }}" alt="First slide">
+				<img class="d-block w-100" src="{{ url('upload/' . $noticia->filepath) }}" alt="First slide">
 
 				<div class="carousel-caption d-none d-md-block">
 					<h5><a class="header-carousel carousel" href="">{{ $noticia->titulo }}</a></h5>
@@ -33,12 +33,10 @@
 
 	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="sr-only">Anterior</span>
 	</a>
 
 	<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
 		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="sr-only">Próximo</span>
 	</a>
 	
 </div>

@@ -5,6 +5,7 @@
 	<div class="container">
 		<div class="barraBusca">
 
+			<br>
 			{!! $barraBusca !!}
 			<h2>Resultados encontrados para "{!! $termoBusca !!}": {{ $wordCount }}</h2>
 
