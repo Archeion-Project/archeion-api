@@ -11,7 +11,7 @@
 
 		<!-- Fonts -->
 		<link rel="dns-prefetch" href="//fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css?family=Nunito|Source+Code+Pro|IBM+Plex+Mono|Raleway:300&display=swap" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css?family=Nunito|Source+Code+Pro|IBM+Plex+Mono|Raleway:300&display=swap" rel="stylesheet">
 
 		<!-- Scripts -->
 		<script src="{{ asset('js/app.js') }}"></script>
@@ -33,6 +33,7 @@
 		<!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 		<link href="{{ asset('css/wb.css') }}" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/openseadragon.min.js"></script>
 
 		<style type="text/css">
 			img {
@@ -73,6 +74,135 @@
 		/**
 		* for showing edit item popup
 		*/
+			$('body').on('click', '#escolher-ano-periodico', function (event) {
+
+				$('.dia-cell').fadeOut(100, function() {
+					$(this).html('').fadeIn(100);
+				});
+
+				$('.page-cell').fadeOut(100, function() {
+					$(this).html('').fadeIn(100);
+				});
+
+				target = event.currentTarget
+				periodico = target.attributes["data-periodico"].value
+				ano = target.attributes["data-ano"].value
+				var cells = '';
+
+				$.ajax({
+					type: "GET",
+					dataType: "json",
+					url: '/periodico/' + periodico + '/' + ano,
+					success: function (data) {
+						cells += '<th class="col-2" scope="row">Mes</th>';
+						$.each(data.meses, function( index, value )
+						{
+							cells += '<td class="periodico-nav" id="escolher-mes-periodico" style="cursor: pointer; cursor: hand;" title="Escolha o mês ' + value + '" data-periodico="' + data.periodico + '" data-ano="' + data.ano + '"data-mes="' + value.substring(0, 2) + '">' + value + "</td>";
+						});
+						$('.mes-cell').fadeOut(100, function() {
+							$(this).html(cells).fadeIn(100);
+						});
+					}
+				});
+			})
+
+			$('body').on('click', '#escolher-mes-periodico', function (event) {
+
+				$('.page-cell').fadeOut(100, function() {
+					$(this).html('').fadeIn(100);
+				});
+
+				target = event.currentTarget;
+				periodico = target.attributes["data-periodico"].value
+				ano = target.attributes["data-ano"].value
+				mes = target.attributes["data-mes"].value
+				var cells = '';
+
+				$.ajax({
+					type: "GET",
+					dataType: "json",
+					url: '/periodico/' + periodico + '/' + ano + '/' + mes,
+					success: function (data) {
+						cells += '<th class="col-2" scope="row">Dia</th>';
+						$.each(data.dias, function( index, value ) {
+							cells += '<td class="periodico-nav" id="escolher-dia-periodico" style="cursor: pointer; cursor: hand;" data-periodico="' + data.periodico + '" data-ano="' + ano + '"data-mes="' + mes + '"data-dia="' + value + '" title="Escolha o dia ' + value + '">' + value + "</td>";
+						});
+						$('.dia-cell').fadeOut(100, function() {
+							$(this).html(cells).fadeIn(100);
+						});
+					}
+				});
+			})
+
+			$('body').on('click', '#escolher-dia-periodico', function (event) {
+
+				target = event.currentTarget;
+				periodico = target.attributes["data-periodico"].value
+				ano = target.attributes["data-ano"].value
+				mes = target.attributes["data-mes"].value
+				dia = target.attributes["data-dia"].value
+				var cells = '';
+
+				$.ajax({
+					type: "GET",
+					dataType: "json",
+					url: '/periodico/' + periodico + '/' + ano + '/' + mes +  '/'  + dia,
+					success: function (data) {
+						cells += '<th class="col-2" scope="row">Página</th>';
+						$.each(data.pages, function( index, value ) {
+							cells += '<td class="periodico-nav" id="escolher-page-periodico" style="cursor: pointer; cursor: hand;" data-issue="' + data.issue + '" data-page="' + value +'" title="Escolha a página ' + value + '">' + value + "</td>";
+						});
+						$('.page-cell').fadeOut(100, function() {
+							$(this).html(cells).fadeIn(100);
+						});
+					}
+				});
+			})
+
+			$('body').on('click', '#escolher-page-periodico', function (event) {
+
+				target = event.currentTarget;
+				issue = target.attributes["data-issue"].value
+				page = target.attributes["data-page"].value
+				var frameImagem = '';
+				var viewer = new OpenSeadragon.Viewer({
+							type: "zoomifytileservice",
+							id: "openseadragon1",
+							prefixUrl: "/openseadragon-bin-2.4.2/images/",
+						});
+				viewer.destroy();
+
+				$.ajax({
+					type: "GET",
+					dataType: "json",
+					url: '/periodico-page/' + issue + '/' + page,
+					success: function (data) {
+						var viewer = null;
+						frameImagem = '<img src="' + data.pagePath + '">';
+						$('.img-header').fadeOut(100, function() {
+							$(this).html(data.img_header).fadeIn(100);
+						});
+						// $('.frame-imagem').fadeOut(100, function() {
+						// 	$(this).html(frameImagem).fadeIn(100);
+						// });
+						viewer = new OpenSeadragon.Viewer({
+							type:       "zoomifytileservice",
+							id: "openseadragon1",
+							prefixUrl: "/openseadragon-bin-2.4.2/images/",
+							showRotationControl: true,
+							showNavigator:  true,
+							gestureSettingsTouch: {
+								pinchRotate: true
+							},
+							tileSources: {
+								type: 'image',
+								url:  data.pagePath,
+							}
+						});
+					}
+				});
+			})
+
 			$('body').on('click', '#editar-item-grid', function (event) {
 				var button = $(event.currentTarget) // Button that triggered the modal
 				var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -108,7 +238,6 @@
 
 				//Substitui id da ficha em modal-form > action > route
 				var str = $('#modal-form').attr('action');
-				console.log(str)
 				var i = str.lastIndexOf('/');
 				if (i != -1) {
 					str = str.substr(0, i + 1) + recipient.id;
@@ -248,5 +377,4 @@
 		})
 
 	</script>
-
 </html>

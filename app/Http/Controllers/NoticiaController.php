@@ -56,7 +56,6 @@ class NoticiaController extends BibliowebController
 		{
 			$confirmaSalvar = 'none';
 		}
-
 		return redirect()->route('noticia.create', ['confirmarSalvar' => $confirmaSalvar]);
 	}
 
@@ -108,6 +107,8 @@ class NoticiaController extends BibliowebController
 	 */
 	public function destroy(Noticia $noticia)
 	{
+		$mensagem = $noticia->delete() ? 'destroy' : 'destroy-error';
+		return redirect()->route('noticia.create', ['mensagem' => $mensagem]);
 		//
 	}
 }

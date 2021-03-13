@@ -28,7 +28,9 @@ class IssuesSeeder extends Seeder
 
 		foreach ($originalDirList as $origDir)
 		{
-			if (! empty($filesystem->files($folderPath . $origDir)))
+			$folderpath = $folderPath . $origDir;
+
+			if (! empty($filesystem->files($folderpath)))
 			{
 				$siglaPeriodico = null;
 				$ano = null;
@@ -48,15 +50,15 @@ class IssuesSeeder extends Seeder
 				$periodico = Periodico::where('sigla', $siglaPeriodico)->first();
 				$datas = $this->obterDatas($dia, $mes, $ano);
 				$issue = new Issue;
-				$issue->id_periodico = $periodico->id;
+				$issue->periodico_id = $periodico->id;
 				$issue->titulo = $datas['inicio']->format('d_m_Y');
-				$issue->numero_paginas = count($filesystem->files($folderPath . $origDir));
+				$issue->numero_paginas = count($filesystem->files($folderpath));
 				$issue->periodicidade = $this->obterPeriodicidadeIssue($datas);
 				$issue->data_original = $origDir;
 				$issue->data_inicio = $datas['inicio'];
 				$issue->data_termino = $datas['termino'];
 				$issue->save();
-				$files = $filesystem->files($folderPath . $origDir);
+				$files = $filesystem->files($folderpath);
 
 				foreach ($files as $file)
 				{
@@ -75,12 +77,18 @@ class IssuesSeeder extends Seeder
 					$page = new Page;
 					$page->numero = $numero;
 					$page->filepath = $filepath . '/' . $file->getRelativePathname();
-					// $page->conteudo = ;
-					$page->id_issue = $issue->id;
+					// $page->conteudo = $this->getOCR($folderpath . '/' . $file->getRelativePathname());
+					$page->issue_id = $issue->id;
 					$page->save();
 				}
 			}
 		}
+	}
+
+	private function getOCR(string $filepath)
+	{
+		$texto = shell_exec('tesseract ' . $filepath . ' stdout');
+		return rtrim ($texto, '\n\r');		
 	}
 
 	private function obterDatas(? string $dias = null, ? string $meses = null, string $anos): array

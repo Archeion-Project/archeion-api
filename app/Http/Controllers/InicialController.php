@@ -61,6 +61,15 @@ class InicialController extends BibliowebController
 			->with('conteudo', $sobre);
 	}
 
+	public function abrirNoticia(Noticia $noticia)
+	{
+		$abrirNoticia = view('conteudo.abrir-noticia')
+			->with('noticia', $noticia);
+
+		return $this->conteudoTela
+			->with('conteudo', $abrirNoticia);
+	}
+
 	public function buscar()
 	{
 		$pesquisaFicha = new PesquisaFicha(request()->termoBusca);

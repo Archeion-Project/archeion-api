@@ -13,7 +13,16 @@
 					<li><a class="nav-link" href="/dashboard">Dashboard</a></li>
 					<li><a class="nav-link" href="{!! route('noticia.create') !!}">Notícias</a></li>
 					<li><a class="nav-link" href="{!! route('ficha.create') !!}">Fichas</a></li>
-					<li><a class="nav-link" href="/periodicos">Periódicos</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Acervo</a>
+						<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="{!! route('periodico.index') !!}">Consultar Periódicos</a></li>
+						<li><a class="dropdown-item" href="{!! route('gerenciar.colecoes') !!}">Gerenciar Coleções</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="#">Item adicional</a></li>
+						</ul>
+					</li>
+					</li>
 					<li>
 						@can('isAdmin')
 							<a class="nav-link registrar" href="{{ route('register') }}">{{ __('Usuários') }}</a>

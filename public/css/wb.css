@@ -40,6 +40,11 @@ a.footer-link {
 	color:black;
 }
 
+a.inicio {
+	font-size: 1.2em;
+	color:white;
+}
+
 a.editar-item-grid:hover {
 	font-size: 1em;
 	color:blue;
@@ -95,6 +100,13 @@ img.center {
 	margin-left: auto;
 	margin-right: auto;
 	width: 20%;
+}
+
+img.abrir-noticia {
+	max-width: 500px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 input {
@@ -158,7 +170,11 @@ div.card {
 }
 
 div.index {
-margin-top: 0px;
+	margin-top: 0px;
+}
+
+div.img-header {
+	text-align: center;
 }
 
 table#grid-lista {
@@ -173,9 +189,16 @@ table.table-hover {
 	color: white;
 }
 
-tr#grid-items:hover {
+td#grid-items:hover {
 	background-color:#004400;
+}
 
+td.periodico-nav {
+	text-align: center;
+}
+
+td.periodico-nav:hover {
+	background-color:#004400;
 }
 
 div.form-busca {

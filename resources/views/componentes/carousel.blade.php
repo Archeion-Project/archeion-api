@@ -15,13 +15,12 @@
 	<div class="carousel-inner">
 
 		@foreach ($noticias as $noticia)
-
 			<div @if (!key($noticias)) class="carousel-item active" @else class="carousel-item" @endif>
 				<img class="d-block w-100" src="{{ url('upload/' . $noticia->filepath) }}" alt="First slide">
 
 				<div class="carousel-caption d-none d-md-block">
-					<h5><a class="header-carousel carousel" href="">{{ $noticia->titulo }}</a></h5>
-					<p><a class="sub-header-carousel carousel" href="">{{ $noticia->subtitulo }}</a><p>
+					<h5><a class="header-carousel carousel" href="{!! route('noticia.abrir', $noticia) !!}">{{ $noticia->titulo }}</a></h5>
+					<p><a class="sub-header-carousel carousel" href="{!! route('noticia.abrir', $noticia) !!}">{{ $noticia->subtitulo }}</a><p>
 				</div>
 			</div>
 			

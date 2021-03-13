@@ -226,15 +226,18 @@
 <div class="modal fade" id="apagar-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-md modal-dialog-centered" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h2 class="modal-title black">Confirma Apagar Ficha?</h2>
-			</div>
-				<form action="{{ route('ficha.destroy', $ficha) }}" id="modal-form" method="DELETE">
-					<div class="form-group col-md">
-						<button type="submit" class="btn btn-danger">Sim</button>
-						<button type="button" class="btn btn-info" data-dismiss="modal">Não</button>
-					</div>
-				</form>
+			<div class="container col-md">
+				<div class="modal-header">
+					<h2 class="modal-title black">Confirma Apagar Ficha?</h2>
+				</div>
+					<form action="{{ route('ficha.destroy', $ficha) }}" id="modal-form" method="DELETE">
+						<div class="form-group col-md">
+							<button type="submit" class="btn btn-danger">Sim</button>
+							<button type="button" class="btn btn-info" data-dismiss="modal">Não</button>
+						</div>
+					</form>
+					<br>
+				</div>
 			</div>
 		</div>
 	</div>

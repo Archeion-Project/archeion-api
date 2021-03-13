@@ -18,7 +18,6 @@ class CreatePeriodicosTable extends Migration
 			$table->char('localizacao', 255)->nullable();
 			$table->char('titulo', 255)->nullable();
 			$table->char('imprenta', 255)->nullable();
-			$table->char('periodicidade', 255)->nullable();
 			$table->char('sigla', 16)->nullable();
 			$table->char('forma_fisica', 1)->nullable();
 			$table->char('idioma', 1)->nullable();

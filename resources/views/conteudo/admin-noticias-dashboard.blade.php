@@ -7,7 +7,6 @@
 		@csrf
 		@method('POST')
 		<br>
-		
 		<div class="alert alert-success" style="display: {!! $confirmaSalvar !!};" id="div-confirmacao" role="alert">
 			  Notícia cadastrada com sucesso!
 		</div>
@@ -21,9 +20,8 @@
 			<div class="form-group col-4">
 				<label for="inputStatus">Status da Publicação</label>
 				<select class="form-select" id="status" name="status">
-					<option value="0">Apagado</option>
-					<option value="1">Oculto</option>
-					<option value="2">Publicado</option>
+					<option value="{{App\Noticia::OCULTO}}">Oculto</option>
+					<option value="{{App\Noticia::PUBLICADO}}" selected>Publicado</option>
 				</select>
 			</div>
 		</div>
@@ -130,8 +128,7 @@
 						<!-- Dropdown menu links -->
 							<h6 class="dropdown-header">{{ $noticia->titulo }}</h6>
 							<a class="dropdown-item" id="editar-item-grid" data-toggle="modal" data-target="#editar-modal" data-whatever="{{ $noticia }}">Editar</a>
-							<a class="dropdown-item" id="editar-item-grid" href="{{ route('noticia.destroy', $noticia) }}">Ocultar</a>
-							<a class="dropdown-item" id="editar-item-grid" href="{{ route('noticia.destroy', $noticia) }}">Apagar</a>
+							<a href="#" class="dropdown-item" id="apagar-item-grid" data-toggle="modal" data-target="#apagar-modal" data-whatever="{{ $noticia }}">Apagar</a>
 						</div>
 					</td>
 				</tr>
@@ -163,7 +160,6 @@
 						<div class="modal-body-subtitulo form-modal form-group col-md"">
 							<label for="modal-status">Status da Publicação</label>
 							<select class="form-select" id="modal-status" name="status" value="{{$noticia->status}}">
-								<option value="{{App\Noticia::APAGADO}}">Apagado</option>
 								<option value="{{App\Noticia::OCULTO}}">Oculto</option>
 								<option value="{{App\Noticia::PUBLICADO}}">Publicado</option>
 							</select>
@@ -190,6 +186,26 @@
 					<br>
 				</div>
 			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="apagar-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-md modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="container col-md">
+				<div class="modal-header">
+					<h2 class="modal-title black">Confirma Apagar Notícia?</h2>
+				</div>
+					<form action="{{ route('noticia.destroy', $noticia) }}" id="modal-form" method="DELETE">
+						<div class="form-group col-md">
+							<button type="submit" class="btn btn-danger">Sim</button>
+							<button type="button" class="btn btn-info" data-dismiss="modal">Não</button>
+						</div>
+					</form>
+					<br>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

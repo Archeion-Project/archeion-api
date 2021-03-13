@@ -44,12 +44,12 @@ class PeriodicosSeeder extends Seeder
 			],
 			[
 				'titulo' => 'Correio de J. Fora (1)',
-				'sigla' => 'CF',
+				'sigla' => 'CJF1',
 				'forma_fisica' => '1',
 			],
 			[
 				'titulo' => 'Correio de J. Fora (2)',
-				'sigla' => 'CJ',
+				'sigla' => 'CJF2',
 				'forma_fisica' => '1',
 			],
 			[
@@ -89,7 +89,7 @@ class PeriodicosSeeder extends Seeder
 			],
 			[
 				'titulo' => 'Gazeta de Juiz de Fora',
-				'sigla' => 'GJ',
+				'sigla' => 'GJF',
 				'forma_fisica' => '1',
 			],
 			[
@@ -139,32 +139,32 @@ class PeriodicosSeeder extends Seeder
 			],
 			[
 				'titulo' => 'Diário da Tarde (1)',
-				'sigla' => 'T1',
+				'sigla' => 'DT1',
 				'forma_fisica' => '1',
 			],
 			[
 				'titulo' => 'Diário da Tarde (2)',
-				'sigla' => 'T2',
+				'sigla' => 'DT2',
 				'forma_fisica' => '1',
 			],
 			[
 				'titulo' => 'O Lince',
-				'sigla' => NULL,
+				'sigla' => 'OLIN',
 				'forma_fisica' => '2',
 			],
 			[
 				'titulo' => 'Evolução',
-				'sigla' => NULL,
+				'sigla' => 'EVOL',
 				'forma_fisica' => '2',
 			],
 			[
 				'titulo' => 'Marília',
-				'sigla' => NULL,
+				'sigla' => 'MARI',
 				'forma_fisica' => '2',
 			],
 			[
 				'titulo' => 'Luz',
-				'sigla' => NULL,
+				'sigla' => 'LUZ',
 				'forma_fisica' => '2',
 			],
 			[

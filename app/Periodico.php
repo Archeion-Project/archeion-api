@@ -2,10 +2,15 @@
 
 namespace App;
 
+use App\Issue;
 use Illuminate\Database\Eloquent\Model;
 
 class Periodico extends Model
 {
+
+	const JORNAL = 1;
+	const REVISTA = 2;
+	
 	/**
 	 * The attributes that are mass assignable.
 	 *
@@ -25,5 +30,10 @@ class Periodico extends Model
 		'data_termino' => 'datetime',
 		'deleted_at' => 'datetime',
 	];
+
+	public function issues()
+	{
+		return $this->hasMany(Issue::class, 'periodico_id');
+	}
 
 }

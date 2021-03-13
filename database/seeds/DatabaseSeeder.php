@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Database\Seeds\FichasTableSeeder;
 use Database\Seeds\NoticiasTableSeeder;
 use Database\Seeds\PeriodicosSeeder;
+use Database\Seeds\IssuesSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
 		$this->call(PeriodicosSeeder::class);
 		$this->call(FichasTableSeeder::class);
 		$this->call(NoticiasTableSeeder::class);
+		$this->call(IssuesSeeder::class);
 		Model::reguard();
 	}
 }

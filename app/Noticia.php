@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\Log;
 class Noticia extends Model
 {
 
-	const APAGADO = 1;
-	const OCULTO = 2;
-	const PUBLICADO = 3;
+	const OCULTO = 1;
+	const PUBLICADO = 2;
 
 	protected $fillable = [
 		'titulo', 'subtitulo', 'imagem', 'texto', 'status', 'updated_at', 'created_at', 
@@ -32,11 +31,7 @@ class Noticia extends Model
 	{
 		$texto = null;
 
-		if ($this->status == self::APAGADO)
-		{
-			$texto = 'Apagado';
-		}
-		elseif ($this->status == self::OCULTO)
+		if ($this->status == self::OCULTO)
 		{
 			$texto = 'Oculto';
 		}
