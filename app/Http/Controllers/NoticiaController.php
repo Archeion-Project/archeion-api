@@ -65,9 +65,10 @@ class NoticiaController extends BibliowebController
 	 * @param  \App\Noticia  $noticia
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Noticia $noticia)
+	public function show(Noticia $noticium)
 	{
-		//
+		return view('conteudo.admin-noticia-delete')
+			->with(['noticia' => $noticium]);
 	}
 
 	/**
@@ -76,9 +77,10 @@ class NoticiaController extends BibliowebController
 	 * @param  \App\Noticia  $noticia
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Noticia $noticia)
+	public function edit(Noticia $noticium)
 	{
-		//
+		return view('conteudo.admin-noticia-edit')
+			->with(['noticia' => $noticium]);
 	}
 
 	/**
@@ -94,7 +96,11 @@ class NoticiaController extends BibliowebController
 		$noticium->subtitulo = $request->subtitulo;
 		$noticium->status = $request->status;
 		$noticium->texto = $request->texto;
-		$noticium->save();
+		if ($request->filepath)
+		{
+			$noticium->filepath = $request->filepath;
+		}
+		$noticium->update();
 
 		return redirect()->route('noticia.create');
 	}

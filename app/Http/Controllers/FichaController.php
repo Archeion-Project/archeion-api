@@ -29,7 +29,7 @@ class FichaController extends BibliowebController
 		$mensagem = request()->mensagem ?? '';
 		$periodicos = Periodico::all();
 		$fichas = Ficha::orderBy('updated_at', 'desc')->get();
-		return view('conteudo.admin-fichas')
+		return view('conteudo.admin-fichas-dashboard')
 			->with(['fichas' => $fichas])
 			->with(['periodicos' => $periodicos])
 			->with(['mensagem' => $mensagem]);
@@ -67,7 +67,11 @@ class FichaController extends BibliowebController
 	 */
 	public function show(Ficha $ficha)
 	{
-		//
+		$periodicos = Periodico::all();
+
+		return view('conteudo.admin-ficha-delete')
+			->with(['periodicos' => $periodicos])
+			->with(['ficha' => $ficha]);
 	}
 
 	/**
@@ -78,7 +82,11 @@ class FichaController extends BibliowebController
 	 */
 	public function edit(Ficha $ficha)
 	{
-		//
+		$periodicos = Periodico::all();
+
+		return view('conteudo.admin-ficha-edit')
+			->with(['periodicos' => $periodicos])
+			->with(['ficha' => $ficha]);
 	}
 
 	/**
@@ -92,8 +100,8 @@ class FichaController extends BibliowebController
 	{
 		$ficha->assunto = $request->assunto;
 		$ficha->periodico_id = $request->periodico;
-		$ficha->data_edicao = $request->data_edicao;
-		$ficha->duracao_edicao = $request->duracao_edicao;
+		$ficha->data_edicao = \Carbon\Carbon::parse($request->data_edicao);
+		$ficha->duracao_edicao = \Carbon\Carbon::parse($request->duracao_edicao);
 		$ficha->pagina = $request->pagina;
 		$ficha->resumo = $request->resumo;
 		$ficha->comentario = $request->comentario;
