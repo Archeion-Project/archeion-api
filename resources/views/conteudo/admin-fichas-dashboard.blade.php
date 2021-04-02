@@ -44,11 +44,11 @@
 		<br>
 		<div class="row">
 			<div class="form-group col-sm">
-				<label for="inputAssunto">Assunto</label>
+				<label for="input-assunto">Assunto</label>
 				<input type="text" class="form-control" id="assunto" name="assunto" placeholder="Digite aqui o assunto">
 			</div>
 			<div class="form-group col-sm md-form">
-				<label for="inputPeriodico">Periódico</label>
+				<label for="input-periodico">Periódico</label>
 				<select class="form-select" id="periodico" name="periodico">
 					@foreach ($periodicos as $periodico)
 						<option value="{{ $periodico->id }}">{{ $periodico->titulo }}</option>
@@ -56,14 +56,14 @@
 				</select>
 			</div>
 			<div class="form-group col-sm">
-				<label for="inputPagina">Página</label>
+				<label for="input-pagina">Página</label>
 				<input type="text" class="form-control" id="pagina" name="pagina" placeholder="Página">
 			</div>
 		</div>
 		<br>
 		<div class="row">
 			<div class="form-group col-sm">
-				<label for="inputDataEdicao">Data da Edição</label>
+				<label for="input-data-edicao">Data da Edição</label>
 				<input type="text" class="form-control datepicker" id="data_edicao" name="data_edicao" placeholder="Data da Edição" readonly='true'>
 			</div>
 			<div class="form-group col-sm">
@@ -137,8 +137,8 @@
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							<!-- Dropdown menu links -->
 								<h6 class="dropdown-header">{{ $ficha->assunto }}</h6>
-								<a class="dropdown-item" id="editar-item-grid" data-toggle="modal" data-target="#editar-modal" data-whatever="{{ $ficha }}">Editar</a>
-								<a href="#" class="dropdown-item" id="apagar-item-grid" data-toggle="modal" data-target="#apagar-modal" data-whatever="{{ $ficha }}">Apagar</a>
+								<a href="{!! route('ficha.edit', $ficha) !!}" class="dropdown-item" id="editar-item-grid">Editar</a>
+								<a href="{!! route('ficha.show', $ficha) !!}" class="dropdown-item" id="apagar-item-grid">Apagar</a>
 							</div>
 						</div>
 					</td>
@@ -148,96 +148,22 @@
 	</table>
 </div>
 
-<!-- Editar Modal -->
+<!-- Apagar Modal -->
 
-<div class="modal fade" id="editar-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h2 class="modal-title black">Editar Ficha</h2>
-			</div>
-			<form action="{!! route('ficha.update', $ficha) !!}" id="modal-form" method="POST" enctype="multipart/form-data">
-				@csrf
-				@method('PATCH')
-				<div class="container col-md">
-					<div class="row">
-						<div class="modal-body-assunto form-modal form-group col-md">
-							<label for="modal-assunto" class="col-form-label">Assunto</label>
-							<input type="text" class="form-control" id="modal-assunto" value="{{$ficha->assunto}}" name="assunto" placeholder="Digite aqui o assunto da ficha">
-						</div>
-						<div class="modal-body-periodico form-modal form-group col-md">
-							<label for="modal-periodico">Periódico</label>
-							<select class="modal-body-periodico form-control custom-select" id="modal-periodico" name="periodico">
-								@foreach ($periodicos as $periodico)
-
-									@if ($ficha->periodico_id == $periodico->id)
-										<option value="{{ $periodico->id }}" selected>{{ $periodico->titulo }}</option>
-									@else
-										<option value="{{ $periodico->id }}">{{ $periodico->titulo }}</option>
-									@endif
-	
-								@endforeach
-							</select>
-						</div>
-					</div>
-					<div class="row">
-						<div class="modal-body-pagina form-modal form-group col-md">
-							<label for="modal-pagina">Página</label>
-							<input type="text" class="form-control" id="modal-pagina" value="{{$ficha->pagina}}" name="pagina" placeholder="Digite aqui a página">
-						</div>
-						<div class="modal-body-data-edicao form-modal form-group col-md">
-							<label for="modal-data_edicao">Data da Edição</label>
-							<input type="text" class="form-control datepicker" id="modal-data_edicao" value="{{$ficha->data_edicao}}" name="data_edicao" placeholder="Digite aqui a Data da Edição" readonly='true'>
-						</div>
-					</div>
-					<div class="row">
-						<div class="modal-body-edicao form-modal form-group col-md">
-							<label for="modal-edicao">Edição</label>
-							<input type="text" class="form-control" id="modal-edicao" value="{{$ficha->edicao}}" name="edicao" placeholder="Digite aqui a Edição">
-						</div>
-						<div class="modal-body-duracao-edicao form-modal form-group col-md">
-							<label for="modal-duracao_edicao">Duração da Edição</label>
-							<input type="text" class="form-control datepicker" id="modal-duracao_edicao" value="{{$ficha->duracao_edicao}}" name="duracao_edicao" placeholder="Digite aqui a duração da Edição" readonly='true'>
-						</div>
-					</div>
-					<div class="row">
-						<div class="modal-body-resumo form-modal form-group col-md">
-							<label for="modal-resumo">Resumo</label>
-							<textarea type="text" class="form-control" id="modal-resumo" value="{{$ficha->resumo}}" name="resumo" placeholder="Digite aqui o Resumo"></textarea>
-						</div>
-					</div>
-					<div class="row">
-						<div class="modal-body-comentario form-modal form-group col-md">
-							<label for="modal-comentario">Comentário</label>
-							<textarea type="text" class="form-control" id="modal-comentario" value="{{$ficha->comentario}}" name="comentario" placeholder="Digite aqui o Comentário"></textarea>
-						</div>
-					</div>
-					<br>
-					<div class="form-group col-md">
-						<button type="submit" class="btn btn-primary">Atualizar Ficha</button>
-					</div>
-					<br>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="apagar-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-md modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="container col-md">
 				<div class="modal-header">
-					<h2 class="modal-title black">Confirma Apagar Ficha?</h2>
+					<h2 class="modal-title black">Confirma Apagar Ficha? {{ route('ficha.destroy', $ficha) }}</h2>
 				</div>
-					<form action="{{ route('ficha.destroy', $ficha) }}" id="modal-form" method="DELETE">
-						<div class="form-group col-md">
-							<button type="submit" class="btn btn-danger">Sim</button>
-							<button type="button" class="btn btn-info" data-dismiss="modal">Não</button>
-						</div>
-					</form>
-					<br>
-				</div>
+				<form action="{{ route('ficha.destroy', $ficha) }}" id="modal-form" method="DELETE">
+					<div class="form-group col-md">
+						<button type="submit" class="btn btn-danger">Sim</button>
+						<button type="button" class="btn btn-info" data-dismiss="modal">Não</button>
+					</div>
+				</form>
+				<br>
 			</div>
 		</div>
 	</div>

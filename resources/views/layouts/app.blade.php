@@ -23,9 +23,10 @@
 			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
 			  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
 			  crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/openseadragon.min.js"></script>
 
 		<!-- Styles -->
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -33,7 +34,6 @@
 		<!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 		<link href="{{ asset('css/wb.css') }}" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/openseadragon.min.js"></script>
 
 		<style type="text/css">
 			img {
@@ -202,53 +202,6 @@
 					}
 				});
 			})
-
-			$('body').on('click', '#editar-item-grid', function (event) {
-				var button = $(event.currentTarget) // Button that triggered the modal
-				var recipient = button.data('whatever') // Extract info from data-* attributes
-				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-				var modal = $('#editar-modal')
-
-				// Atribui aos inputs do modal os atributos do 
-				// objeto (noticia, ficha, etc) que vem do link editar
-				// Importante: os ids dos inputs dos modais devem ter
-				// nome identico aos atributos do objeto
-
-				jQuery.each(recipient, function(name, value) {
-					modal.find('#modal-' + name).val(value)
-				});
-
-				//Substitui id da ficha em modal-form > action > route
-				var str = $('#modal-form').attr('action');
-				var i = str.lastIndexOf('/');
-				if (i != -1) {
-					str = str.substr(0, i + 1) + recipient.id;
-				}
-				modal.find('#modal-form').attr('action', str)
-
-			})
-
-			$('#apagar-modal').on('shown.bs.modal', function (event) {
-
-				var button = $(event.relatedTarget) // Button that triggered the modal
-				var recipient = button.data('whatever') // Extract info from data-* attributes
-				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-				var modal = $(this)
-
-				//Substitui id da ficha em modal-form > action > route
-				var str = $('#modal-form').attr('action');
-				var i = str.lastIndexOf('/');
-				if (i != -1) {
-					str = str.substr(0, i + 1) + recipient.id;
-				}
-				modal.find('#modal-form').attr('action', str)
-
-			})
-
-			setTimeout(function() {
-				$(".alert").fadeOut().empty();
-			}, 3000);
 
 			$.datepicker.setDefaults({
 				dateFormat: 'dd-mm-yy',

@@ -127,87 +127,14 @@
 						<div class="dropdown-menu">
 						<!-- Dropdown menu links -->
 							<h6 class="dropdown-header">{{ $noticia->titulo }}</h6>
-							<a class="dropdown-item" id="editar-item-grid" data-toggle="modal" data-target="#editar-modal" data-whatever="{{ $noticia }}">Editar</a>
-							<a href="#" class="dropdown-item" id="apagar-item-grid" data-toggle="modal" data-target="#apagar-modal" data-whatever="{{ $noticia }}">Apagar</a>
+							<a href="{!! route('noticia.edit', $noticia) !!}" class="dropdown-item" id="editar-item-grid">Editar</a>
+							<a href="{!! route('noticia.show', $noticia) !!}" class="dropdown-item" id="apagar-item-grid">Apagar</a>
 						</div>
 					</td>
 				</tr>
 			@endforeach
 		</tbody>
 	</table>
-</div>
-
-<!-- Editar Modal -->
-
-<div class="modal fade" id="editar-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h2 class="modal-title black">Editar notícia</h2>
-			</div>
-			<form action="{!! route('noticia.update', $noticia) !!}" id="modal-form" method="POST" enctype="multipart/form-data">
-				@csrf
-				@method('PATCH')
-				<div class="container col-sm">
-					<div class="row">
-						<div class="modal-body-titulo form-modal form-group col-md">
-							<label for="modal-titulo" class="col-form-label">Titulo</label>
-							<input type="text" class="form-control" id="modal-titulo" value="{{$noticia->titulo}}" name="titulo" placeholder="Digite aqui o título da notícia">
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="modal-body-subtitulo form-modal form-group col-md"">
-							<label for="modal-status">Status da Publicação</label>
-							<select class="form-select" id="modal-status" name="status" value="{{$noticia->status}}">
-								<option value="{{App\Noticia::OCULTO}}">Oculto</option>
-								<option value="{{App\Noticia::PUBLICADO}}">Publicado</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="modal-body-subtitulo form-modal form-group col-md">
-							<label for="modal-subtitulo">Subtítulo</label>
-							<input type="text" class="modal-body-subtitulo form-control" id="modal-subtitulo" value="{{$noticia->subtitulo}}" name="subtitulo" placeholder="Digite aqui o subtítulo da notícia">
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="modal-body-texto form-modal form-group col-md">
-							<label for="modal-texto">Texto</label>
-							<textarea type="text" class="form-control" id="modal-texto" name="texto" placeholder="Digite aqui a notícia"></textarea>
-						</div>
-					</div>
-					<br>
-					<div class="form-group col-md">
-						<button type="submit" class="btn btn-primary">Atualizar notícia</button>
-					</div>
-					<br>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="apagar-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-md modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="container col-md">
-				<div class="modal-header">
-					<h2 class="modal-title black">Confirma Apagar Notícia?</h2>
-				</div>
-					<form action="{{ route('noticia.destroy', $noticia) }}" id="modal-form" method="DELETE">
-						<div class="form-group col-md">
-							<button type="submit" class="btn btn-danger">Sim</button>
-							<button type="button" class="btn btn-info" data-dismiss="modal">Não</button>
-						</div>
-					</form>
-					<br>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
 
 @endsection
