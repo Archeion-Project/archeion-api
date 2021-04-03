@@ -13,6 +13,8 @@
 
 Auth::routes();
 
+Route::get('/dashboard', 'BibliowebController@index')->name('dashboard.index');
+
 Route::get('/', 'InicialController@index')->name('inicio');
 
 Route::get('/executaBusca',  'InicialController@buscar');

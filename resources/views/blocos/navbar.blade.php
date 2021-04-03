@@ -10,7 +10,7 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav mr-auto">
-					<li><a class="nav-link" href="/dashboard">Dashboard</a></li>
+					<li><a class="nav-link" href="{!! route('dashboard.index') !!}">Dashboard</a></li>
 					<li><a class="nav-link" href="{!! route('noticia.create') !!}">Notícias</a></li>
 					<li><a class="nav-link" href="{!! route('ficha.create') !!}">Fichas</a></li>
 					<li class="nav-item dropdown">
