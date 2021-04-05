@@ -4,17 +4,24 @@
 
 <h5>Criação de feature branches</h5>
 
-<p>A branch <code>master</code> é versão de produção. Novas funcionalidades devem ser desenvolvidas em feature branches a partir da branch <code>development</code>. Para criar uma branch local a partir de development:</q>
+<p>A branch <code>master</code> é versão de produção. Novas funcionalidades <strong>DEVEM</strong> ser desenvolvidas em <code>feature branches</code> criadas a partir da branch <code>development</code>. Para criar uma branch local a partir de development:</q>
 
 <code>git checkout -b &lt;new-feature-branch-name&gt; &lt;development&gt;</code>
 
 <p>Isso irá criar uma nova feature branch a partir de <code>dev</code>.</p>
-<p>Dar push apenas nos arquivos relativos ao trabaho na feature branch</p>
+<p>Dar push apenas nos arquivos relativos ao trabaho na <code>feature branch</code></p>
 <p>Não add arquivos de configuração<qp>
 
-<h5>Pushing uma branch local para remote</h5>
+<p>Pushing uma branch local para remote:</p>
 
 <code>git push -u origin &lt;branch-name&gt;</code>
+
+<h5>Pull requests e merging<h5>
+
+<p>Após dar o merge de uma <code>feature branch</code> em <code>development</code> é <strong>NECESSÁRIO APAGAR</strong> a <code>feature branch</code> criada.</p>
+<p>Após dar o merge da branch <code>development</code> na branch <code>master</code>, <strong>NÃO</strong> apagar a branch <code>development</code></p>
+<p></p>
+<p></p>
 
 <h4>Configuração do amazon-ec2/php/apache a partir do ssh:</h4>
 
