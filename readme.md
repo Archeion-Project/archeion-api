@@ -16,7 +16,7 @@
 
 <code>git push -u origin &lt;branch-name&gt;</code>
 
-<h5>Pull requests e merging<h5>
+<h5>Pull requests e merging</h5>
 
 <p>Após dar o merge de uma <code>feature branch</code> em <code>development</code> é <strong>NECESSÁRIO APAGAR</strong> a <code>feature branch</code> criada.</p>
 <p>Após dar o merge da branch <code>development</code> na branch <code>master</code>, <strong>NÃO</strong> apagar a branch <code>development</code></p>
