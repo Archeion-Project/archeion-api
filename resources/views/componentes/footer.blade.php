@@ -34,13 +34,13 @@
 					<li><a class="footer-link" href="/acervo">Acervo</a></li>
 					<li><a class="footer-link" href="/localizacao">Localização</a></li>
 					<li><a class="footer-link" href="/sobre">Sobre o projeto</a></li>
-					@guest
+					<!-- @guest
 
 						<li class="nav-item">
 							<a class="footer-link" href="{{ route('login') }}">{{ __('Administração') }}</a>
 						</li>
 
-					@endguest
+					@endguest -->
 
 				</ul>
 

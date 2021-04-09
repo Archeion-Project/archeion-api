@@ -10,16 +10,16 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav mr-auto">
-					<li><a class="nav-link" href="/dashboard">Dashboard</a></li>
+					<!-- <li><a class="nav-link" href="{!! route('dashboard.index') !!}">Dashboard</a></li> -->
 					<li><a class="nav-link" href="{!! route('noticia.create') !!}">Notícias</a></li>
 					<li><a class="nav-link" href="{!! route('ficha.create') !!}">Fichas</a></li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Acervo</a>
 						<ul class="dropdown-menu">
 						<li><a class="dropdown-item" href="{!! route('periodico.index') !!}">Consultar Periódicos</a></li>
-						<li><a class="dropdown-item" href="{!! route('gerenciar.colecoes') !!}">Gerenciar Coleções</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">Item adicional</a></li>
+						<!-- <li><a class="dropdown-item" href="{!! route('gerenciar.colecoes') !!}">Gerenciar Coleções</a></li> -->
+						<!-- <li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="#">Item adicional</a></li> -->
 						</ul>
 					</li>
 					</li>
@@ -40,14 +40,14 @@
 			<ul class="navbar-nav ml-auto">
 				<!-- Authentication Links -->
 				@guest
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<a class="nav-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
 					</li>
 					@if (Route::has('register'))
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
 						</li>
-					@endif
+					@endif -->
 				@else
 					<li class="nav-item dropdown">
 						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

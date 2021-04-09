@@ -1,4 +1,27 @@
-<h1>Projeto de extensão realizado pelo IFSudesteMG para a implementação de um sistema de busca em acervo histórico-textual</h1>
+<h1>Projeto de extensão realizado pelo IFSudesteMG para a implementação da Juizforana - Hemeroteca Digital de Juiz de Fora</h1>
+
+<h3>Ciclos de desenvolvimento</h3>
+
+<h5>Criação de feature branches</h5>
+
+<p>A branch <code>master</code> é versão de produção. Novas funcionalidades <strong>DEVEM</strong> ser desenvolvidas em <code>feature branches</code> criadas a partir da branch <code>development</code>. Para criar uma branch local a partir de development:</q>
+
+<code>git checkout -b &lt;new-feature-branch-name&gt; &lt;development&gt;</code>
+
+<p>Isso irá criar uma nova feature branch a partir de <code>dev</code>.</p>
+<p>Dar push apenas nos arquivos relativos ao trabaho na <code>feature branch</code></p>
+<p>Não add arquivos de configuração<qp>
+
+<p>Pushing uma branch local para remote:</p>
+
+<code>git push -u origin &lt;branch-name&gt;</code>
+
+<h5>Pull requests e merging</h5>
+
+<p>Após dar o merge de uma <code>feature branch</code> em <code>development</code> é <strong>NECESSÁRIO APAGAR</strong> a <code>feature branch</code> criada.</p>
+<p>Após dar o merge da branch <code>development</code> na branch <code>master</code>, <strong>NÃO</strong> apagar a branch <code>development</code></p>
+<p></p>
+<p></p>
 
 <h4>Configuração do amazon-ec2/php/apache a partir do ssh:</h4>
 
@@ -28,7 +51,7 @@
 			<li>sudo apt-get install mysql-server mysql-client</li>
 			<li>sudo mysql_secure_installation</li>
 			<li>CREATE USER 'algumusuario'@'localhost' IDENTIFIED BY 'algumapassword';</li>
-			<li>GRANT ALL PRIVILEGES ON * . * TO 'algumapassword'@'localhost';</li>
+			<li>GRANT ALL PRIVILEGES ON * . * TO 'algumusuario'@'localhost';</li>
 		</ul>
 	</li>
 	<li>Instalação do apache
@@ -55,15 +78,19 @@
 			<li>sudo composer install</li>
 			<li>sudo mkdir storage</li>
 			<li>sudo chmod -R 775 storage/</li>
+			<li>chmod -R 775 bootstrap/</li>
+			<li>sudo chmod -R 755 /var/www</li>
 		</ul>
 	</li>
 	<li>Definir serviço
 		<ul>
+			<li>sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/biblioweb.conf</li>
+			<li>sudo nano /etc/apache2/sites-available/biblioweb.conf</li>
 			<li>Adicionar à biblioweb.conf</li>
 			<li>
 				<code>
 					&lt;VirtualHost *:80&gt;<br>
-					&emsp;ServerName 3.22.51.93<br>
+					&emsp;ServerName (adicionar Public IPv4 DNS ou domínio)<br>
 					&emsp;ServerAdmin webmaster@thedomain.com<br>
 					&emsp;DocumentRoot /var/www/html/biblioweb/public<br>
 					&emsp;&emsp;&lt;Directory /var/www/html/biblioweb&gt;<br>
@@ -82,10 +109,18 @@
 	</li>
 	<li>Definir permissões
 		<ul>
-			<li>chmod -R 775 storage</li>
-			<li>chmod -R 775 bootstrap</li>
-			<li>No diretório biblioweb/storage execute: mkdir -p framework/{sessions,views,cache}</li>
+			<li>cd /var/www/html/biblioweb/storage execute: sudo mkdir -p framework/{sessions,views,cache}</li>
 			<li>chmod -R 775 sessions, views, cache</li>
+			<li>No diretório biblioweb/ execute: composer install</li>
+			<li>Alterar bootstrap/cache/config.php session array: de 'driver' => 'file' para 'driver' => 'cookie'</li>
+			<li>sudo systemctl restart apache2</li>
+			<li>sudo mkdir /var/www/html/biblioweb/storage/framework/cache/data</li>
+		</ul>
+	</li>
+	<li>Criar banco de dados
+		<ul>
+			<li>Acessar terminal do mysql</li>
+			<li>CREATE DATABASE biblioweb;</li>
 			<li>No diretório biblioweb/ execute: composer install</li>
 			<li>Alterar bootstrap/cache/config.php session array: de 'driver' => 'file' para 'driver' => 'cookie'</li>
 			<li>sudo systemctl restart apache2</li>
