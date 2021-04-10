@@ -10,6 +10,7 @@ use App\Http\Controllers\BibliowebController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use GuzzleHttp\Client;
 
 class PeriodicoController extends BibliowebController
 {
@@ -236,14 +237,25 @@ class PeriodicoController extends BibliowebController
 
 	public function obterPeriodicoPage(Issue $issue, string $page)
 	{
+
+		$projectId = 'web-hemeroteca-13fc0';
+		$pathToKey = 'config/web-hemeroteca-13fc0-eea7d0ec6f22.json';
+
+		$client = new Client([
+				'base_uri' => 'https://firebasestorage.googleapis.com/v0/b/web-hemeroteca-13fc0.appspot.com/o/',
+				'timeout'  => 2.0,
+			 ]);
+
 		$pages = [];
 		$page = Page::where('issue_id', $issue->id)->where('numero', $page)->first();
+		$response = $client->request('GET', str_replace('/', '%2F', $page->filepath));
+		$downloadToken = json_decode($response->getBody()->getContents())->downloadTokens;
 		$periodico = $issue->periodico()->first();
 		$imgHeader = $issue->data_inicio->format('d-m-Y') . ' - ' . ' Página ' . $page->numero;
 		$pagePath = asset('acervo/biblioweb/' . $page->filepath);
 
 		return json_encode([
-			// 'pagePath' => 'https://firebasestorage.googleapis.com/v0/b/bibioweb-storage.appspot.com/o/31%2F02.jpg?alt=media&token=f2f819eb-9d22-416d-8025-11fff22e2da5',
+			'pagePath' => 'https://firebasestorage.googleapis.com/v0/b/bibioweb-storage.appspot.com/o/' . $page->filepath . '?alt=media&token=' . $downloadToken,
 			'pagePath' => $pagePath,
 			'img_header' => $imgHeader,
 			'data_inicio' => $issue->data_inicio,
