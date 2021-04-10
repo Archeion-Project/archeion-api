@@ -255,7 +255,7 @@ class PeriodicoController extends BibliowebController
 		$pagePath = asset('acervo/biblioweb/' . $page->filepath);
 
 		return json_encode([
-			'pagePath' => 'https://firebasestorage.googleapis.com/v0/b/bibioweb-storage.appspot.com/o/' . $page->filepath . '?alt=media&token=' . $downloadToken,
+			'pagePath' => 'https://firebasestorage.googleapis.com/v0/b/web-hemeroteca-13fc0.appspot.com/o/' . $page->filepath . '?alt=media&token=' . $downloadToken,
 			'pagePath' => $pagePath,
 			'img_header' => $imgHeader,
 			'data_inicio' => $issue->data_inicio,
