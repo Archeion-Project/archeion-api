@@ -240,23 +240,24 @@ class PeriodicoController extends BibliowebController
 
 		$projectId = 'web-hemeroteca-13fc0';
 		$pathToKey = 'config/web-hemeroteca-13fc0-eea7d0ec6f22.json';
+		$baseUri = 'https://firebasestorage.googleapis.com/v0/b/web-hemeroteca-13fc0.appspot.com/o/';
 
 		$client = new Client([
-				'base_uri' => 'https://firebasestorage.googleapis.com/v0/b/web-hemeroteca-13fc0.appspot.com/o/',
+				'base_uri' => $baseUri,
 				'timeout'  => 2.0,
 			 ]);
 
-		$pages = [];
 		$page = Page::where('issue_id', $issue->id)->where('numero', $page)->first();
-		$response = $client->request('GET', str_replace('/', '%2F', $page->filepath));
+		$filePathSuffix = str_replace('/', '%2F', $page->filepath);
+
+		$response = $client->request('GET', $filePathSuffix);
 		$downloadToken = json_decode($response->getBody()->getContents())->downloadTokens;
+
 		$periodico = $issue->periodico()->first();
 		$imgHeader = $issue->data_inicio->format('d-m-Y') . ' - ' . ' Página ' . $page->numero;
-		$pagePath = asset('acervo/biblioweb/' . $page->filepath);
 
 		return json_encode([
-			'pagePath' => 'https://firebasestorage.googleapis.com/v0/b/web-hemeroteca-13fc0.appspot.com/o/' . $page->filepath . '?alt=media&token=' . $downloadToken,
-			'pagePath' => $pagePath,
+			'pagePath' => 'https://firebasestorage.googleapis.com/v0/b/web-hemeroteca-13fc0.appspot.com/o/' . $filePathSuffix . '?alt=media&token=' . $downloadToken,
 			'img_header' => $imgHeader,
 			'data_inicio' => $issue->data_inicio,
 			'data_termino' => $issue->data_termino,
